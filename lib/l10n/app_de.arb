@@ -1,31 +1,357 @@
 {
   "@@locale": "de",
   "appTitle": "Wandern mit den NaturFreunden",
-  "@appTitle": {"description": "Name der App (Arbeitstitel)"},
-
+  "@appTitle": {
+    "description": "Name der App (Arbeitstitel)"
+  },
   "navHikes": "Wanderungen",
   "navGroups": "Gruppen",
   "navMyTours": "Meine Touren",
   "navHelp": "Hilfe",
-  "@navHikes": {"description": "Untere Leiste, Bereich 1"},
-
+  "@navHikes": {
+    "description": "Untere Leiste, Bereich 1"
+  },
   "back": "Zurück",
-  "@back": {"description": "Zurück-Knopf oben links"},
-
+  "@back": {
+    "description": "Zurück-Knopf oben links"
+  },
   "homeGreeting": "Willkommen!",
   "homeIntro": "Was möchten Sie heute tun?",
   "homeSearchHike": "Wanderung suchen",
   "homeGroupHikes": "Gruppenwanderungen",
   "homeMyTours": "Meine Touren",
-
   "searchTitle": "Wanderung suchen",
   "groupsTitle": "Gruppenwanderungen",
   "myToursTitle": "Meine Touren",
   "helpTitle": "Hilfe",
-
   "comingSoon": "Dieser Bereich wird gerade gebaut. Bald finden Sie hier mehr.",
   "toHome": "Zur Startseite",
-
   "loading": "Wird geladen …",
-  "offlineHint": "Kein Internet – gespeicherte Touren funktionieren trotzdem."
+  "offlineHint": "Kein Internet – gespeicherte Touren funktionieren trotzdem.",
+  "startPointTitle": "Wo starten Sie?",
+  "startPointIntro": "Hier beginnen und enden Ihre Wanderungen. Sie können das jederzeit ändern.",
+  "startPointNfhName": "Naturfreundehaus Veitshöchheim",
+  "startPointNfhDetail": "„Am Kalten Brunnen“, Sendelbachstraße 146. Der Fußweg zur Haltestelle wird mitgerechnet.",
+  "startPointBfName": "Bahnhof Veitshöchheim",
+  "startPointBfDetail": "Direkt an Bahn und Bus.",
+  "startPointHeader": "Start: {name}",
+  "@startPointHeader": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "change": "ändern",
+  "changeStartPointSemantics": "Startpunkt ändern",
+  "selected": "ausgewählt",
+  "questionProgress": "Frage {current} von {total}",
+  "@questionProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "qTypeTitle": "Wie möchten Sie wandern?",
+  "typeLoopLong": "Rundweg ab Veitshöchheim – ohne Bus und Bahn",
+  "typeWalkOutLong": "Loslaufen und mit Bus/Bahn zurück",
+  "typeRideBothLong": "Mit Bus/Bahn hin, wandern, mit Bus/Bahn zurück",
+  "anyOption": "Egal",
+  "qDurationTitle": "Wie lange möchten Sie gehen?",
+  "durationUpTo2h": "Bis 2 Stunden",
+  "duration2To4h": "2 bis 4 Stunden",
+  "durationLonger": "Länger als 4 Stunden",
+  "qEffortTitle": "Wie anstrengend?",
+  "effortEasy": "Leicht",
+  "effortMedium": "Mittel",
+  "qFoodTitle": "Möchten Sie unterwegs einkehren?",
+  "foodYes": "Ja, mit Einkehr",
+  "qRideTitle": "Wie lange höchstens fahren (einfach)?",
+  "rideUpTo": "Bis {minutes} Minuten",
+  "@rideUpTo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "next": "Weiter",
+  "showSuggestions": "Vorschläge zeigen",
+  "showAllTours": "Alle Touren zeigen",
+  "suggestionsTitle": "Vorschläge für Sie",
+  "allToursTitle": "Alle Touren",
+  "noResults": "Keine passende Tour. Möchten Sie eine Frage ändern?",
+  "changeAnswers": "Fragen ändern",
+  "tourTypeShort": "{type, select, loop{Rundweg} walkOutRideBack{Hin zu Fuß, zurück mit Bus/Bahn} rideBothWays{Hin und zurück mit Bus/Bahn} other{}}",
+  "@tourTypeShort": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "difficulty": "{level, select, easy{leicht} medium{mittel} hard{anspruchsvoll} other{}}",
+  "@difficulty": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "walkingTime": "Gehzeit: {duration}",
+  "@walkingTime": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "rideNone": "Ohne Bus und Bahn",
+  "rideBack": "Rückfahrt ca. {duration}",
+  "@rideBack": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "rideBoth": "Fahrt ca. {to} hin, {back} zurück",
+  "@rideBoth": {
+    "placeholders": {
+      "to": {
+        "type": "String"
+      },
+      "back": {
+        "type": "String"
+      }
+    }
+  },
+  "foodHintAtKm": "Einkehr: {name}, km {km}",
+  "@foodHintAtKm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "foodHintAtEnd": "Einkehr: {name}, am Ziel",
+  "@foodHintAtEnd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "foodHintAtStart": "Einkehr: {name}, am Start",
+  "@foodHintAtStart": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "demoBadge": "Beispieltour mit Demo-Daten",
+  "openTourSemantics": "Tour {name} ansehen",
+  "@openTourSemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "durationMinutes": "{minutes} Min.",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "durationHours": "{hours} Std.",
+  "@durationHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "distanceKm": "{km} km",
+  "@distanceKm": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "ascentUp": "{meters} m bergauf",
+  "@ascentUp": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "meters": "{meters} m",
+  "@meters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryFoodOnRoute": "Einkehr unterwegs",
+  "summaryFoodAtEnd": "Einkehr am Ziel",
+  "weekday": "{day, select, 1{Montag} 2{Dienstag} 3{Mittwoch} 4{Donnerstag} 5{Freitag} 6{Samstag} 7{Sonntag} other{}}",
+  "@weekday": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "dateShort": "{weekday}, {day}.{month}.",
+  "@dateShort": {
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "day": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      }
+    }
+  },
+  "showConnection": "Verbindung zeigen",
+  "showDayPlan": "Tagesablauf zeigen",
+  "dayPlanTitle": "Tagesablauf",
+  "elevationTitle": "Höhenprofil",
+  "elevationSemantics": "Höhenprofil über {km}: niedrigster Punkt {min} Meter, höchster Punkt {max} Meter über dem Meer.",
+  "@elevationSemantics": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      },
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "foodTitle": "Einkehren",
+  "foodNone": "Auf dieser Tour gibt es keine Einkehr.",
+  "foodKind": "{kind, select, gasthaus{Gasthaus} haeckerwirtschaft{Häckerwirtschaft} cafe{Café} huette{Hütte} biergarten{Biergarten} other{Einkehr}}",
+  "@foodKind": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "foodAtKm": "bei km {km}",
+  "@foodAtKm": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "foodAtEnd": "am Ziel",
+  "foodAtStart": "am Start",
+  "foodDetour": "Umweg {minutes} Min. zu Fuß",
+  "@foodDetour": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "openOn": "Am {weekday} geöffnet",
+  "@openOn": {
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "restDayOn": "Am {weekday} Ruhetag",
+  "@restDayOn": {
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "outOfSeasonOn": "Am {weekday} geschlossen (außerhalb der Saison)",
+  "@outOfSeasonOn": {
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "openingUnknown": "Öffnungszeiten bitte vorher prüfen",
+  "seasonalHint": "Nur zeitweise geöffnet (saisonal)",
+  "call": "Anrufen",
+  "callSemantics": "{name} anrufen",
+  "@callSemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "plannedDay": "Geplanter Tag: {date}",
+  "@plannedDay": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "changeDay": "Tag ändern",
+  "onTheWayTitle": "Unterwegs",
+  "poiKind": "{kind, select, wc{WC} bench{Bank} viewpoint{Aussicht} shortcut{Abkürzung} info{Info} other{}}",
+  "@poiKind": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "atKm": "km {km}",
+  "@atKm": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "surfaceTitle": "Wege",
+  "warningsTitle": "Hinweise",
+  "shortcutsTitle": "Abkürzungen",
+  "descriptionTitle": "Beschreibung",
+  "tourNotFound": "Diese Tour gibt es nicht mehr. Bitte wählen Sie eine andere.",
+  "loadError": "Die Touren konnten nicht geladen werden. Bitte schließen Sie die App und öffnen Sie sie erneut.",
+  "elevationRange": "Höhe zwischen {min} m und {max} m",
+  "@elevationRange": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  }
 }

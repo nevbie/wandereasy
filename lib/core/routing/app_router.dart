@@ -5,13 +5,33 @@ import '../../features/groups/ui/groups_screen.dart';
 import '../../features/help/ui/help_screen.dart';
 import '../../features/home/ui/home_screen.dart';
 import '../../features/offline/ui/my_tours_screen.dart';
-import '../../features/search/ui/search_screen.dart';
+import '../../features/search/data/start_point_store.dart';
+import '../../features/search/ui/question_screen.dart';
+import '../../features/search/ui/results_screen.dart';
+import '../../features/search/ui/start_point_screen.dart';
+import '../../features/tour/ui/day_plan_screen.dart';
+import '../../features/tour/ui/tour_detail_screen.dart';
 import '../widgets/main_shell.dart';
 import 'app_routes.dart';
 
-GoRouter createAppRouter({String initialLocation = AppRoutes.home}) {
+GoRoute _route(String path, GoRouterWidgetBuilder builder) =>
+    GoRoute(path: path.substring(1), builder: builder);
+
+/// [needsStartPoint]: `true`, solange noch kein Startpunkt gewählt ist. Dann
+/// führt die Startseite zur Startpunkt-Wahl (SPEC 5.2, allererster Start).
+GoRouter createAppRouter({
+  String initialLocation = AppRoutes.home,
+  bool Function()? needsStartPoint,
+}) {
   return GoRouter(
     initialLocation: initialLocation,
+    redirect: (context, state) {
+      if (state.matchedLocation == AppRoutes.home &&
+          (needsStartPoint?.call() ?? false)) {
+        return AppRoutes.startPoint;
+      }
+      return null;
+    },
     routes: [
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => MainShell(navigationShell: shell),
@@ -24,9 +44,37 @@ GoRouter createAppRouter({String initialLocation = AppRoutes.home}) {
                 path: AppRoutes.home,
                 builder: (context, state) => const HomeScreen(),
                 routes: [
+                  _route(
+                    AppRoutes.startPoint,
+                    (c, s) => const StartPointScreen(),
+                  ),
+                  _route(AppRoutes.search, (c, s) => const TourTypeQuestion()),
+                  _route(
+                    AppRoutes.searchDuration,
+                    (c, s) => const DurationQuestion(),
+                  ),
+                  _route(
+                    AppRoutes.searchEffort,
+                    (c, s) => const EffortQuestion(),
+                  ),
+                  _route(AppRoutes.searchFood, (c, s) => const FoodQuestion()),
+                  _route(AppRoutes.searchRide, (c, s) => const RideQuestion()),
+                  _route(
+                    AppRoutes.suggestions,
+                    (c, s) => const SuggestionsScreen(),
+                  ),
+                  _route(AppRoutes.allTours, (c, s) => const AllToursScreen()),
                   GoRoute(
-                    path: AppRoutes.search.substring(1),
-                    builder: (context, state) => const SearchScreen(),
+                    path: 'tour/:id',
+                    builder: (c, s) =>
+                        TourDetailScreen(tourId: s.pathParameters['id']!),
+                    routes: [
+                      GoRoute(
+                        path: 'ablauf',
+                        builder: (c, s) =>
+                            DayPlanScreen(tourId: s.pathParameters['id']!),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -63,7 +111,9 @@ GoRouter createAppRouter({String initialLocation = AppRoutes.home}) {
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
-  final router = createAppRouter();
+  final router = createAppRouter(
+    needsStartPoint: () => ref.read(startPointProvider) == null,
+  );
   ref.onDispose(router.dispose);
   return router;
 });

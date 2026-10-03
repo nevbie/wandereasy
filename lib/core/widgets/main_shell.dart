@@ -135,7 +135,7 @@ class _BottomBarItem extends StatelessWidget {
                 minHeight: AppSizes.minTapTarget + 8,
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,

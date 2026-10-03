@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../l10n/generated/app_localizations.dart';
 import '../theme/app_theme.dart';
+import 'icon_label.dart';
 
 /// Grundgerüst für jeden Bildschirm.
 ///
@@ -16,6 +17,7 @@ class AppPage extends StatelessWidget {
     required this.title,
     required this.children,
     this.showBack,
+    this.top,
   });
 
   final String title;
@@ -23,6 +25,9 @@ class AppPage extends StatelessWidget {
 
   /// `null` = automatisch, je nachdem ob zurückgegangen werden kann.
   final bool? showBack;
+
+  /// Optionaler Bereich über der Überschrift (z. B. der gewählte Startpunkt).
+  final Widget? top;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +45,13 @@ class AppPage extends StatelessWidget {
               if (canGoBack)
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: TextButton.icon(
+                  child: TextButton(
                     onPressed: () => context.pop(),
-                    icon: const Icon(Icons.arrow_back),
-                    label: Text(l10n.back),
+                    child: IconLabel(Icons.arrow_back, l10n.back),
                   ),
                 ),
               if (canGoBack) const SizedBox(height: AppSizes.tapTargetGap),
+              if (top != null) ...[top!, const SizedBox(height: 16)],
               Semantics(
                 header: true,
                 child: Text(title, style: theme.textTheme.headlineMedium),
@@ -76,10 +81,9 @@ class ComingSoon extends StatelessWidget {
         Text(l10n.comingSoon, style: Theme.of(context).textTheme.bodyLarge),
         if (showHomeButton) ...[
           const SizedBox(height: 24),
-          FilledButton.icon(
+          FilledButton(
             onPressed: () => context.go('/'),
-            icon: const Icon(Icons.home),
-            label: Text(l10n.toHome),
+            child: IconLabel(Icons.home, l10n.toHome),
           ),
         ],
       ],
