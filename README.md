@@ -11,7 +11,8 @@ Voraussetzung: Flutter (stable), für Android zusätzlich Android SDK und JDK 17
 
 ```bash
 flutter pub get
-flutter gen-l10n          # erzeugt lib/l10n/generated/ aus lib/l10n/app_de.arb
+flutter gen-l10n
+dart run build_runner build   # nur nach Änderungen an Drift-Tabellen          # erzeugt lib/l10n/generated/ aus lib/l10n/app_de.arb
 flutter analyze
 flutter test
 flutter run               # Standard: Demo-/Mock-Daten
@@ -23,7 +24,8 @@ Konfiguration per `--dart-define` (keine Secrets im Repo), siehe
 | Name | Bedeutung | Standard |
 |---|---|---|
 | `TRANSIT_PROVIDER` | `mock`, `static` (später `motis`, `trias`) | `mock` |
-| `MAP_STYLE_URL` | Style-URL des Kartenanbieters | – |
+| `MAP_TILE_URL` | URL-Vorlage für Rasterkacheln `{z}/{x}/{y}` | OSM-Standardkacheln (nur für Tests/wenige Nutzer) |
+| `MAP_ATTRIBUTION` | Zuordnung des Kartenanbieters | `© OpenStreetMap-Mitwirkende` |
 | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | Backend | – |
 
 ## Ordnerstruktur
@@ -52,5 +54,5 @@ Tests und baut ein Release-APK. Das APK liegt im Actions-Lauf unter
 
 Optionale Secrets: `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`,
 `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD` (ohne diese: Debug-Signatur),
-`MAP_STYLE_URL`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`. Optionale Variable:
-`TRANSIT_PROVIDER`.
+`SUPABASE_URL`, `SUPABASE_ANON_KEY`. Optionale Variablen:
+`TRANSIT_PROVIDER`, `MAP_TILE_URL`, `MAP_ATTRIBUTION`.

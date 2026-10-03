@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/groups/ui/groups_screen.dart';
 import '../../features/help/ui/help_screen.dart';
 import '../../features/home/ui/home_screen.dart';
+import '../../features/navigation/ui/navigation_screen.dart';
 import '../../features/offline/ui/my_tours_screen.dart';
 import '../../features/search/data/start_point_store.dart';
 import '../../features/search/ui/question_screen.dart';
@@ -93,6 +94,18 @@ GoRouter createAppRouter({
               GoRoute(
                 path: AppRoutes.myTours,
                 builder: (context, state) => const MyToursScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'tour/:id',
+                    builder: (c, s) =>
+                        TourDetailScreen(tourId: s.pathParameters['id']!),
+                  ),
+                  GoRoute(
+                    path: 'navigation/:id',
+                    builder: (c, s) =>
+                        NavigationScreen(tourId: s.pathParameters['id']!),
+                  ),
+                ],
               ),
             ],
           ),

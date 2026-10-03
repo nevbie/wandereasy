@@ -17,6 +17,7 @@ void main() {
     '/tour/demo_loop/ablauf',
     '/gruppen',
     '/meine-touren',
+    '/meine-touren/navigation/demo_loop',
     '/hilfe',
   ];
 

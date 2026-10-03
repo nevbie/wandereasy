@@ -85,3 +85,9 @@ String? foodHint(AppLocalizations l10n, Tour tour) {
     ),
   };
 }
+
+/// Speichergröße, z. B. „40 KB“ oder „2,5 MB“.
+String formatBytes(AppLocalizations l10n, int bytes) {
+  if (bytes < 1000 * 1000) return l10n.sizeKb((bytes / 1000).ceil());
+  return l10n.sizeMb(formatDecimal((bytes / 100000).round() / 10));
+}

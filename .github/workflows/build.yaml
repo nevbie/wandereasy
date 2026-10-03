@@ -39,7 +39,7 @@ jobs:
           flutter gen-l10n
 
       - name: Formatierung prüfen
-        run: dart format --output=none --set-exit-if-changed $(git ls-files '*.dart')
+        run: dart format --output=none --set-exit-if-changed $(git ls-files '*.dart' ':!:*.g.dart')
 
       - name: Analyse
         run: flutter analyze
@@ -69,15 +69,24 @@ jobs:
       - name: APK bauen
         env:
           TRANSIT_PROVIDER: ${{ vars.TRANSIT_PROVIDER || 'mock' }}
-          MAP_STYLE_URL: ${{ secrets.MAP_STYLE_URL }}
+          MAP_TILE_URL: ${{ vars.MAP_TILE_URL }}
+          MAP_ATTRIBUTION: ${{ vars.MAP_ATTRIBUTION }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          flutter build apk --release \
-            --dart-define=TRANSIT_PROVIDER="$TRANSIT_PROVIDER" \
-            --dart-define=MAP_STYLE_URL="$MAP_STYLE_URL" \
-            --dart-define=SUPABASE_URL="$SUPABASE_URL" \
+          # Leere Werte nicht übergeben, sonst gelten die Standardwerte nicht.
+          defines=(
+            --dart-define=TRANSIT_PROVIDER="$TRANSIT_PROVIDER"
+            --dart-define=SUPABASE_URL="$SUPABASE_URL"
             --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
+          )
+          if [ -n "$MAP_TILE_URL" ]; then
+            defines+=(--dart-define=MAP_TILE_URL="$MAP_TILE_URL")
+          fi
+          if [ -n "$MAP_ATTRIBUTION" ]; then
+            defines+=(--dart-define=MAP_ATTRIBUTION="$MAP_ATTRIBUTION")
+          fi
+          flutter build apk --release "${defines[@]}"
 
       - name: APK hochladen
         uses: actions/upload-artifact@v4

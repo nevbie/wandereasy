@@ -38,3 +38,19 @@ klären muss, stehen in SPEC Abschnitt 16.
 | D24 | Tour-Detail | Karte und „Für unterwegs speichern“ fehlen noch | Kommen mit M2 |
 | D25 | Höhenmeter | Hysterese-Schwelle 3 m gegen GPS-Rauschen | Übliches Verfahren; Wert anpassbar |
 | D26 | Knöpfe mit Symbol | Eigener Inhalt `IconLabel` statt `FilledButton.icon` | `.icon`-Varianten brechen nicht um und liefen bei 200 % Schrift über |
+
+## M2
+
+| # | Thema | Annahme / Entscheidung | Grund |
+|---|---|---|---|
+| D27 | Kartenkacheln | **OSM-Standardkacheln** (`tile.openstreetmap.org`) für Tests und wenige Nutzer, mit User-Agent `de.naturfreunde.wandern` und immer sichtbarer Zuordnung. Per `MAP_TILE_URL` / `MAP_ATTRIBUTION` austauschbar | Entscheidung des Vereins (noch kein Anbieter), **abweichend von SPEC 9**. Vor breiter Nutzung Anbieter wählen (OSM Tile Usage Policy) |
+| D28 | Kartenbibliothek | `flutter_map` (Raster) statt `maplibre_gl` (Vektor) | Für Rasterkacheln genügt `flutter_map`; reines Dart, in Widget-Tests und im Web testbar, eingebauter Kachel-Cache. Bei Wechsel auf Vektorkacheln neu bewerten (`vector_map_tiles` oder `maplibre_gl`) |
+| D29 | Offline-Karte | **Kein Vorab-Download** von Kartenausschnitten (OSM-Richtlinie verbietet Bulk-Download). Stattdessen: angesehene Kacheln werden gecacht (App-Verzeichnis, max. 300 MB, HTTP-Cache-Regeln). Ohne Netz werden auch veraltete Kacheln gezeigt (`OfflineTolerantCachingProvider`, keine Zusatzanfragen). Route, Start/Ziel, Einkehr und POIs zeichnet die App selbst – sie sind offline immer sichtbar. Hinweistext unter der Karte im Offline-Fall | SPEC 9 (Zoom 10–16 vorab) erst mit eigenem Anbieter/PMTiles möglich |
+| D30 | Speichergröße / WLAN | Angezeigt wird die Größe der Tourdaten (wenige KB). Keine WLAN-Abfrage, da nichts Großes geladen wird | Folgt aus D29 |
+| D31 | Lage von Einkehr/POIs | Ohne eigene Koordinaten aus der km-Angabe auf der Route berechnet (`positionAtDistance`) | Demo-Daten haben nur km-Angaben |
+| D32 | Kartenbedienung | Ziehen und Zwei-Finger-Zoom möglich, Drehen aus; Zoom zusätzlich über „+“/„−“ (56 dp) | SPEC 4: einfache Tippbedienung muss reichen |
+| D33 | Beschriftungen auf der Karte | Feste Schriftgröße (16), notfalls verkleinert | Kartenbeschriftungen können nicht mitwachsen; volle Angaben stehen in den Listen darunter |
+| D34 | Offline-Ablage | Drift-Tabelle `saved_tours` mit der vollständigen Tour als JSON. Tour-Detail lädt bei fehlender Verbindung aus der Ablage. Generierter Code (`*.g.dart`) wird eingecheckt | Einfach, robust; Schema wächst mit M5 |
+| D35 | Meine Touren | Je Tour „Wanderung starten“ (Navigation folgt in M3), „Tour ansehen“, „Löschen“ mit Bestätigung „Ja, löschen“ / „Nein, zurück“ | SPEC 4, 5.6 |
+| D36 | Kein-Internet-Hinweis | Leiste über der unteren Navigation (connectivity_plus); im Zweifel gilt „online“ | SPEC 4 „Ladezustände“ |
+| D37 | Web | Offline-Speichern im Web nicht eingerichtet (Drift/WASM) | Web ist nur für die Tourenleitung (M6) |

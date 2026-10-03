@@ -61,7 +61,8 @@ void main() {
     );
     expect(find.text('Tagesablauf zeigen'), findsOneWidget);
     expect(find.text('Einkehren'), findsOneWidget);
-    expect(find.text('DEMO Gasthaus Am Brunnen'), findsOneWidget);
+    // Im Einkehr-Block und als Beschriftung auf der Karte.
+    expect(find.text('DEMO Gasthaus Am Brunnen'), findsNWidgets(2));
     expect(find.text('Am Montag Ruhetag'), findsOneWidget);
     expect(find.text('Höhenprofil'), findsOneWidget);
   });

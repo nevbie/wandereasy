@@ -8,12 +8,15 @@ import '../../../core/widgets/async_views.dart';
 import '../../../core/widgets/icon_label.dart';
 import '../../../core/widgets/section_heading.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../offline/data/offline_providers.dart';
+import '../../offline/data/saved_tours_repository.dart';
 import '../data/tour_providers.dart';
 import '../domain/tour.dart';
 import 'elevation_profile.dart';
 import 'food_section.dart';
 import 'tour_format.dart';
 import 'tour_icons.dart';
+import 'tour_map.dart';
 
 /// Tour-Detail (SPEC 5.4). Karte folgt in M2.
 class TourDetailScreen extends ConsumerWidget {
@@ -80,6 +83,10 @@ class _TourDetail extends StatelessWidget {
               ? IconLabel(Icons.schedule, l10n.showDayPlan)
               : IconLabel(Icons.train, l10n.showConnection),
         ),
+        const SizedBox(height: 16),
+        _SaveForOffline(tour: tour),
+        SectionHeading(l10n.mapTitle),
+        TourMap(tour: tour),
         SectionHeading(l10n.descriptionTitle),
         Text(tour.description, style: body),
         SectionHeading(l10n.elevationTitle),
@@ -144,5 +151,46 @@ class _PoiLine extends StatelessWidget {
       ?poi.note,
     ];
     return _IconLine(poiIcon(poi.kind), parts.join(' · '));
+  }
+}
+
+/// Zweiter Knopf „Für unterwegs speichern“ bzw. Status „Offline verfügbar“.
+class _SaveForOffline extends ConsumerWidget {
+  const _SaveForOffline({required this.tour});
+
+  final Tour tour;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+
+    if (ref.watch(isTourSavedProvider(tour.id))) {
+      return _IconLine(Icons.offline_pin, l10n.savedOffline);
+    }
+
+    Future<void> save() async {
+      await ref.read(savedToursRepositoryProvider).save(tour);
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(l10n.savedSnack)));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        OutlinedButton(
+          onPressed: save,
+          child: IconLabel(Icons.download, l10n.saveForOffline),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          l10n.saveSizeHint(
+            formatBytes(l10n, SavedToursRepository.estimateSizeBytes(tour)),
+          ),
+          style: theme.textTheme.bodyMedium,
+        ),
+      ],
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../offline/data/offline_providers.dart';
 import '../domain/tour.dart';
 import '../domain/tour_repository.dart';
 import 'demo_tour_repository.dart';
@@ -13,12 +14,18 @@ final allToursProvider = FutureProvider<List<Tour>>(
   (ref) => ref.watch(tourRepositoryProvider).allTours(),
 );
 
+/// Eine Tour aus der aktuellen Tourenliste; ist sie dort nicht verfügbar
+/// (z. B. ohne Internet), aus den für unterwegs gespeicherten Touren.
 final tourByIdProvider = FutureProvider.family<Tour?, String>((ref, id) async {
-  final tours = await ref.watch(allToursProvider.future);
-  for (final t in tours) {
-    if (t.id == id) return t;
+  try {
+    final tours = await ref.watch(allToursProvider.future);
+    for (final t in tours) {
+      if (t.id == id) return t;
+    }
+  } on Object {
+    // Weiter mit der Offline-Ablage.
   }
-  return null;
+  return ref.watch(savedToursRepositoryProvider).get(id);
 });
 
 /// Geplanter Wandertag. Standard: heute.

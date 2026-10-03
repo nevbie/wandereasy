@@ -55,10 +55,7 @@ void main() {
 
         await tapBar('Meine Touren');
         expect(
-          find.text(
-            'Dieser Bereich wird gerade gebaut. '
-            'Bald finden Sie hier mehr.',
-          ),
+          find.textContaining('noch keine Tour gespeichert'),
           findsOneWidget,
         );
 

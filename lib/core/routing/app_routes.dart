@@ -17,5 +17,7 @@ abstract final class AppRoutes {
 
   static const String groups = '/gruppen';
   static const String myTours = '/meine-touren';
+  static String myTour(String id) => '/meine-touren/tour/$id';
+  static String navigation(String id) => '/meine-touren/navigation/$id';
   static const String help = '/hilfe';
 }

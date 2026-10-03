@@ -27,7 +27,6 @@
   "comingSoon": "Dieser Bereich wird gerade gebaut. Bald finden Sie hier mehr.",
   "toHome": "Zur Startseite",
   "loading": "Wird geladen …",
-  "offlineHint": "Kein Internet – gespeicherte Touren funktionieren trotzdem.",
   "startPointTitle": "Wo starten Sie?",
   "startPointIntro": "Hier beginnen und enden Ihre Wanderungen. Sie können das jederzeit ändern.",
   "startPointNfhName": "Naturfreundehaus Veitshöchheim",
@@ -353,5 +352,57 @@
         "type": "int"
       }
     }
-  }
+  },
+  "mapTitle": "Karte",
+  "mapSemantics": "Karte der Tour. Die Route ist grün eingezeichnet, Start und Ziel sind markiert.",
+  "mapZoomIn": "Karte vergrößern",
+  "mapZoomOut": "Karte verkleinern",
+  "mapOfflineHint": "Ohne Internet zeigt die Karte nur Ausschnitte, die Sie schon einmal angesehen haben. Die Route ist immer zu sehen.",
+  "mapStart": "Start",
+  "mapEnd": "Ziel",
+  "mapStartEnd": "Start und Ziel",
+  "saveForOffline": "Für unterwegs speichern",
+  "saveSizeHint": "Benötigt ca. {size} Speicher.",
+  "@saveSizeHint": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "sizeKb": "{kb} KB",
+  "@sizeKb": {
+    "placeholders": {
+      "kb": {
+        "type": "int"
+      }
+    }
+  },
+  "sizeMb": "{mb} MB",
+  "@sizeMb": {
+    "placeholders": {
+      "mb": {
+        "type": "String"
+      }
+    }
+  },
+  "savedOffline": "Offline verfügbar",
+  "savedSnack": "Gespeichert. Sie finden die Tour unter „Meine Touren“.",
+  "myToursEmpty": "Sie haben noch keine Tour gespeichert. Suchen Sie eine Wanderung und tippen Sie auf „Für unterwegs speichern“.",
+  "startHike": "Wanderung starten",
+  "viewTour": "Tour ansehen",
+  "deleteTour": "Löschen",
+  "deleteTourTitle": "Tour löschen?",
+  "deleteTourMessage": "„{name}“ wird von diesem Gerät gelöscht. Sie können die Tour später wieder speichern.",
+  "@deleteTourMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteYes": "Ja, löschen",
+  "noGoBack": "Nein, zurück",
+  "navigationTitle": "Navigation",
+  "offlineBanner": "Kein Internet – gespeicherte Touren funktionieren trotzdem."
 }
