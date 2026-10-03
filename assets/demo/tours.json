@@ -1,0 +1,105 @@
+{
+  "_hinweis": "DEMO-DATEN (SPEC 11). Routen, Einkehr, Haltestellen und Fahrzeiten sind erfunden bzw. geschätzt und nur zum Entwickeln gedacht. Keine echten Angaben.",
+  "foodPlaces": [
+    {
+      "id": "demo_gasthaus",
+      "name": "DEMO Gasthaus Am Brunnen",
+      "kind": "gasthaus",
+      "restDays": [1],
+      "openingHours": "Tu-Su 11:00-22:00",
+      "note": "Demo-Eintrag"
+    },
+    {
+      "id": "demo_haecker",
+      "name": "DEMO Häckerwirtschaft am Weinberg",
+      "kind": "haeckerwirtschaft",
+      "openingHours": "Th-Su 15:00-22:00",
+      "seasonFrom": "09-01",
+      "seasonTo": "11-15",
+      "note": "Demo-Eintrag, nur im Herbst geöffnet"
+    },
+    {
+      "id": "demo_cafe",
+      "name": "DEMO Café am Main",
+      "kind": "cafe",
+      "note": "Demo-Eintrag ohne Öffnungszeiten"
+    }
+  ],
+  "tours": [
+    {
+      "id": "demo_loop",
+      "name": "DEMO Rundweg Veitshöchheim",
+      "description": "Beispiel-Rundweg über die Höhen bei Veitshöchheim mit schönem Blick ins Maintal. Nur Demo-Daten.",
+      "tourType": "loop",
+      "startPointIds": ["nfh_vhh", "bf_vhh"],
+      "difficulty": "easy",
+      "gpx": "assets/demo/demo_loop.gpx",
+      "surfaceNotes": "Überwiegend breite Feldwege, ein kurzes Stück Waldpfad.",
+      "warnings": ["Nach Regen ist der Waldpfad bei km 2 rutschig."],
+      "food": [
+        {"placeId": "demo_gasthaus", "position": "onRoute", "atKm": 3.0, "detourMin": 0}
+      ],
+      "pois": [
+        {"kind": "bench", "name": "Bank mit Blick ins Maintal", "atKm": 1.5},
+        {"kind": "viewpoint", "name": "Aussichtspunkt", "atKm": 2.2},
+        {"kind": "wc", "name": "WC im Gasthaus (für Gäste)", "atKm": 3.0},
+        {"kind": "shortcut", "name": "Abkürzung zurück zum Ort", "note": "Spart ca. 2 km", "atKm": 2.5}
+      ]
+    },
+    {
+      "id": "demo_walk_out",
+      "name": "DEMO Veitshöchheim – Thüngersheim",
+      "description": "Beispiel-Streckenwanderung von Veitshöchheim über die Weinberge nach Thüngersheim, zurück mit dem Zug. Nur Demo-Daten.",
+      "tourType": "walkOutRideBack",
+      "startPointIds": ["nfh_vhh", "bf_vhh"],
+      "difficulty": "medium",
+      "gpx": "assets/demo/demo_walk_out.gpx",
+      "surfaceNotes": "Feld- und Weinbergwege, teils Schotter.",
+      "warnings": ["Steiler Abstieg nach km 5."],
+      "stopB": {"id": "demo_stop_thuengersheim", "name": "Thüngersheim Bahnhof (Demo)"},
+      "ride": {"fromEndMin": 10},
+      "food": [
+        {"placeId": "demo_cafe", "position": "onRoute", "atKm": 2.5, "detourMin": 5},
+        {"placeId": "demo_haecker", "position": "atEnd", "detourMin": 3}
+      ],
+      "pois": [
+        {"kind": "bench", "name": "Bank am Weinbergweg", "atKm": 3.0},
+        {"kind": "viewpoint", "name": "Weinbergblick", "atKm": 3.6},
+        {"kind": "info", "name": "Infotafel Weinbau", "atKm": 4.2}
+      ]
+    },
+    {
+      "id": "demo_ride_both",
+      "name": "DEMO Retzbach – Thüngersheim",
+      "description": "Beispiel-Streckenwanderung: mit dem Zug nach Retzbach, über die Höhe nach Thüngersheim und mit dem Zug zurück. Nur Demo-Daten.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "hard",
+      "gpx": "assets/demo/demo_ride_both.gpx",
+      "surfaceNotes": "Waldwege und Pfade, zwei längere Anstiege.",
+      "warnings": ["Langer Anstieg zu Beginn.", "Steiler Abstieg nach km 6."],
+      "stopA": {"id": "demo_stop_retzbach", "name": "Retzbach-Zellingen Bahnhof (Demo)"},
+      "stopB": {"id": "demo_stop_thuengersheim", "name": "Thüngersheim Bahnhof (Demo)"},
+      "ride": {"toStartMin": 20, "fromEndMin": 10},
+      "food": [
+        {"placeId": "demo_cafe", "position": "atEnd", "detourMin": 5}
+      ],
+      "pois": [
+        {"kind": "bench", "name": "Rastplatz im Wald", "atKm": 3.0},
+        {"kind": "viewpoint", "name": "Aussicht über das Maintal", "atKm": 4.5},
+        {"kind": "shortcut", "name": "Abstieg zur Bushaltestelle", "note": "Bei Bedarf früher beenden", "atKm": 4.8}
+      ]
+    },
+    {
+      "id": "natura_trail_hoehfeldplatte",
+      "name": "Natura Trail Höhfeldplatte",
+      "description": "Vereinseigener Rundweg, ca. 15,4 km. Die Route folgt, sobald der Verein die GPX-Datei liefert.",
+      "tourType": "loop",
+      "startPointIds": ["nfh_vhh"],
+      "difficulty": "medium",
+      "gpx": null,
+      "published": false,
+      "isDemo": false
+    }
+  ]
+}

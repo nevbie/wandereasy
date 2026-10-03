@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/routing/app_routes.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/app_page.dart';
+import '../../../core/widgets/icon_label.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../search/data/search_state.dart';
 
 /// Startseite (SPEC 5.1): Begrüßung und drei große Knöpfe.
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     const gap = SizedBox(height: 16);
 
@@ -26,7 +29,11 @@ class HomeScreen extends StatelessWidget {
           primary: true,
           icon: Icons.search,
           label: l10n.homeSearchHike,
-          onPressed: () => context.go(AppRoutes.search),
+          onPressed: () {
+            // Jede neue Suche beginnt mit „Egal“-Antworten.
+            ref.read(searchAnswersProvider.notifier).reset();
+            context.go(AppRoutes.search);
+          },
         ),
         gap,
         _BigButton(
@@ -67,21 +74,10 @@ class _BigButton extends StatelessWidget {
       ),
       alignment: Alignment.centerLeft,
     );
-    final icon = Icon(this.icon, size: 32);
-    final label = Text(this.label);
+    final child = IconLabel(icon, label, iconSize: 32);
 
     return primary
-        ? FilledButton.icon(
-            style: style,
-            onPressed: onPressed,
-            icon: icon,
-            label: label,
-          )
-        : OutlinedButton.icon(
-            style: style,
-            onPressed: onPressed,
-            icon: icon,
-            label: label,
-          );
+        ? FilledButton(style: style, onPressed: onPressed, child: child)
+        : OutlinedButton(style: style, onPressed: onPressed, child: child);
   }
 }

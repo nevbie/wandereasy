@@ -18,3 +18,39 @@ klären muss, stehen in SPEC Abschnitt 16.
 | D9 | Generierte Lokalisierung | `lib/l10n/generated/` wird nicht eingecheckt, sondern per `flutter gen-l10n` erzeugt (auch in CI) | Vermeidet veraltete generierte Dateien |
 | D10 | CI-Auslöser | Zusätzlich zu Push auf `main` und `workflow_dispatch` auch bei Pull Requests auf `main` | Fehler vor dem Zusammenführen erkennen |
 | D11 | Einstellungen | `AppSettings` (Thema, Hochkontrast) vorerst nur im Speicher; Oberfläche und Speicherung folgen in M7 | Umfang M0 |
+
+## M1
+
+| # | Thema | Annahme / Entscheidung | Grund |
+|---|---|---|---|
+| D12 | Koordinaten der Startpunkte | `location = null` für Naturfreundehaus und Bahnhof | SPEC 11: nicht erfinden. Geocoding (Nominatim) war aus der Entwicklungsumgebung nicht erreichbar → **vom Verein bestätigen oder in M4 per Geocoding ermitteln** |
+| D13 | Fußweg Naturfreundehaus → Bahnhof | Demo-Schätzung 15 Min. (`lib/features/tour/domain/start_point.dart`) | Wird in M4 per Fußwege-Routing berechnet |
+| D14 | Demo-Touren | Synthetische Routen aus `tools/make_demo_gpx.py`, Namen beginnen mit „DEMO“, Einkehr-Namen ebenfalls; keine Telefonnummern (damit niemand versehentlich echte Nummern anruft) | SPEC 11 |
+| D15 | Fahrzeiten | Je Tour gepflegte Schätzwerte `ride.toStartMin` / `ride.fromEndMin` ab Bahnhof (Demo); Fahrzeit-Frage nutzt die längere Richtung plus Fußweg vom Startpunkt | Echte Zeiten kommen mit dem TransitProvider (M4) |
+| D16 | Antwort „mittel“ | Bedeutet „höchstens mittel“ (leicht + mittel) | Sonst würden leichte Touren bei „mittel“ fehlen |
+| D17 | Grenzen Gehzeit | bis 2 Std. = ≤ 120 Min.; 2–4 Std. = 121–240 Min.; länger = > 240 Min. (reine Gehzeit ohne Pausen) | Eindeutige Zuordnung |
+| D18 | Einkehr mit Datum | Unbekannte Öffnungszeiten werden nicht ausgefiltert, sondern mit „Öffnungszeiten bitte vorher prüfen“ angezeigt | Lieber zeigen und warnen als gute Touren verstecken |
+| D19 | Öffnungszeiten | Nur Teilmenge der OSM-Syntax (Wochentage, `off`, `24/7`, `PH` ignoriert); alles andere = unbekannt. Saison wiederkehrend ohne Jahr (`MM-DD`), auch über den Jahreswechsel | Für „an diesem Tag geöffnet?“ ausreichend; Uhrzeiten zählen erst im Tagesablauf |
+| D20 | Geplanter Tag | Standard heute; im Einkehr-Block über „Tag ändern“ wählbar. Die Suche fragt (noch) kein Datum ab | SPEC 5.2 sieht keine Datumsfrage vor; Datum gehört zum Tagesablauf (M4) |
+| D21 | Startpunkt-Wahl | Erscheint, solange noch kein Startpunkt gewählt ist, statt der Startseite; Wahl wird mit `shared_preferences` gespeichert | „Beim allerersten Start“ (SPEC 5.2) |
+| D22 | Frage 1 „mit Bild“ | Große Symbole statt Fotos | Noch keine Bilder vorhanden |
+| D23 | Vorschlagskarten | Ohne Foto; höchstens 5, sortiert nach Gehzeit | Keine Fotos in den Demo-Daten |
+| D24 | Tour-Detail | Karte und „Für unterwegs speichern“ fehlen noch | Kommen mit M2 |
+| D25 | Höhenmeter | Hysterese-Schwelle 3 m gegen GPS-Rauschen | Übliches Verfahren; Wert anpassbar |
+| D26 | Knöpfe mit Symbol | Eigener Inhalt `IconLabel` statt `FilledButton.icon` | `.icon`-Varianten brechen nicht um und liefen bei 200 % Schrift über |
+
+## M2
+
+| # | Thema | Annahme / Entscheidung | Grund |
+|---|---|---|---|
+| D27 | Kartenkacheln | **OSM-Standardkacheln** (`tile.openstreetmap.org`) für Tests und wenige Nutzer, mit User-Agent `de.naturfreunde.wandern` und immer sichtbarer Zuordnung. Per `MAP_TILE_URL` / `MAP_ATTRIBUTION` austauschbar | Entscheidung des Vereins (noch kein Anbieter), **abweichend von SPEC 9**. Vor breiter Nutzung Anbieter wählen (OSM Tile Usage Policy) |
+| D28 | Kartenbibliothek | `flutter_map` (Raster) statt `maplibre_gl` (Vektor) | Für Rasterkacheln genügt `flutter_map`; reines Dart, in Widget-Tests und im Web testbar, eingebauter Kachel-Cache. Bei Wechsel auf Vektorkacheln neu bewerten (`vector_map_tiles` oder `maplibre_gl`) |
+| D29 | Offline-Karte | **Kein Vorab-Download** von Kartenausschnitten (OSM-Richtlinie verbietet Bulk-Download). Stattdessen: angesehene Kacheln werden gecacht (App-Verzeichnis, max. 300 MB, HTTP-Cache-Regeln). Ohne Netz werden auch veraltete Kacheln gezeigt (`OfflineTolerantCachingProvider`, keine Zusatzanfragen). Route, Start/Ziel, Einkehr und POIs zeichnet die App selbst – sie sind offline immer sichtbar. Hinweistext unter der Karte im Offline-Fall | SPEC 9 (Zoom 10–16 vorab) erst mit eigenem Anbieter/PMTiles möglich |
+| D30 | Speichergröße / WLAN | Angezeigt wird die Größe der Tourdaten (wenige KB). Keine WLAN-Abfrage, da nichts Großes geladen wird | Folgt aus D29 |
+| D31 | Lage von Einkehr/POIs | Ohne eigene Koordinaten aus der km-Angabe auf der Route berechnet (`positionAtDistance`) | Demo-Daten haben nur km-Angaben |
+| D32 | Kartenbedienung | Ziehen und Zwei-Finger-Zoom möglich, Drehen aus; Zoom zusätzlich über „+“/„−“ (56 dp) | SPEC 4: einfache Tippbedienung muss reichen |
+| D33 | Beschriftungen auf der Karte | Feste Schriftgröße (16), notfalls verkleinert | Kartenbeschriftungen können nicht mitwachsen; volle Angaben stehen in den Listen darunter |
+| D34 | Offline-Ablage | Drift-Tabelle `saved_tours` mit der vollständigen Tour als JSON. Tour-Detail lädt bei fehlender Verbindung aus der Ablage. Generierter Code (`*.g.dart`) wird eingecheckt | Einfach, robust; Schema wächst mit M5 |
+| D35 | Meine Touren | Je Tour „Wanderung starten“ (Navigation folgt in M3), „Tour ansehen“, „Löschen“ mit Bestätigung „Ja, löschen“ / „Nein, zurück“ | SPEC 4, 5.6 |
+| D36 | Kein-Internet-Hinweis | Leiste über der unteren Navigation (connectivity_plus); im Zweifel gilt „online“ | SPEC 4 „Ladezustände“ |
+| D37 | Web | Offline-Speichern im Web nicht eingerichtet (Drift/WASM) | Web ist nur für die Tourenleitung (M6) |

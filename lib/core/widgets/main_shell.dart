@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/offline/data/offline_providers.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../theme/app_theme.dart';
 
 /// Rahmen mit der unteren Leiste: genau 4 Bereiche (SPEC 4 „Navigation“).
-class MainShell extends StatelessWidget {
+class MainShell extends ConsumerWidget {
   const MainShell({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final offline = ref.watch(isOnlineProvider).value == false;
     final items = [
       (Icons.hiking, l10n.navHikes),
       (Icons.groups, l10n.navGroups),
@@ -22,14 +25,21 @@ class MainShell extends StatelessWidget {
 
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: _BottomBar(
-        items: items,
-        selectedIndex: navigationShell.currentIndex,
-        onSelected: (index) => navigationShell.goBranch(
-          index,
-          // Erneutes Tippen auf den aktiven Bereich führt zu dessen Anfang.
-          initialLocation: index == navigationShell.currentIndex,
-        ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (offline) const _OfflineBanner(),
+          _BottomBar(
+            items: items,
+            selectedIndex: navigationShell.currentIndex,
+            onSelected: (index) => navigationShell.goBranch(
+              index,
+              // Erneutes Tippen auf den aktiven Bereich führt zu dessen Anfang.
+              initialLocation: index == navigationShell.currentIndex,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -135,7 +145,7 @@ class _BottomBarItem extends StatelessWidget {
                 minHeight: AppSizes.minTapTarget + 8,
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -159,6 +169,38 @@ class _BottomBarItem extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// „Kein Internet – gespeicherte Touren funktionieren trotzdem.“ (SPEC 4)
+class _OfflineBanner extends StatelessWidget {
+  const _OfflineBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Semantics(
+      liveRegion: true,
+      child: Material(
+        color: scheme.inverseSurface,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Row(
+            children: [
+              Icon(Icons.wifi_off, color: scheme.onInverseSurface),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context).offlineBanner,
+                  style: Theme.of(context).textTheme.bodyMedium
+                      ?.copyWith(color: scheme.onInverseSurface),
+                ),
+              ),
+            ],
           ),
         ),
       ),
