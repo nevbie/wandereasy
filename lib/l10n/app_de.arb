@@ -1,0 +1,31 @@
+{
+  "@@locale": "de",
+  "appTitle": "Wandern mit den NaturFreunden",
+  "@appTitle": {"description": "Name der App (Arbeitstitel)"},
+
+  "navHikes": "Wanderungen",
+  "navGroups": "Gruppen",
+  "navMyTours": "Meine Touren",
+  "navHelp": "Hilfe",
+  "@navHikes": {"description": "Untere Leiste, Bereich 1"},
+
+  "back": "Zurück",
+  "@back": {"description": "Zurück-Knopf oben links"},
+
+  "homeGreeting": "Willkommen!",
+  "homeIntro": "Was möchten Sie heute tun?",
+  "homeSearchHike": "Wanderung suchen",
+  "homeGroupHikes": "Gruppenwanderungen",
+  "homeMyTours": "Meine Touren",
+
+  "searchTitle": "Wanderung suchen",
+  "groupsTitle": "Gruppenwanderungen",
+  "myToursTitle": "Meine Touren",
+  "helpTitle": "Hilfe",
+
+  "comingSoon": "Dieser Bereich wird gerade gebaut. Bald finden Sie hier mehr.",
+  "toHome": "Zur Startseite",
+
+  "loading": "Wird geladen …",
+  "offlineHint": "Kein Internet – gespeicherte Touren funktionieren trotzdem."
+}
