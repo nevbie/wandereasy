@@ -63,7 +63,7 @@
   "qDurationTitle": "Wie lange möchten Sie gehen?",
   "durationUpTo2h": "Bis 2 Stunden",
   "duration2To4h": "2 bis 4 Stunden",
-  "durationLonger": "Länger als 4 Stunden",
+  "durationLonger": "Länger als 4 Stunden (bis ca. 20 km)",
   "qEffortTitle": "Wie anstrengend?",
   "effortEasy": "Leicht",
   "effortMedium": "Mittel",
@@ -495,5 +495,18 @@
         "type": "int"
       }
     }
-  }
+  },
+  "sceneryNice": "Landschaftlich schön",
+  "sceneryOutstanding": "Landschaftlich besonders schön",
+  "rideDirect": "ohne Umsteigen",
+  "rideTransfers": "{count, plural, =1{1-mal umsteigen} other{{count}-mal umsteigen}}",
+  "@rideTransfers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryFoodLate": "Einkehr zum Schluss",
+  "summaryFoodAtStart": "Einkehr am Start"
 }

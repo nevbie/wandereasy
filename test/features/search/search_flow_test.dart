@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wandern/features/search/data/search_state.dart';
 import 'package:wandern/features/tour/data/tour_providers.dart';
 
 import '../../helpers/pump_app.dart';
@@ -96,7 +97,7 @@ void main() {
       find.text('Rundweg ab Veitshöchheim – ohne Bus und Bahn'),
     );
     await next(tester);
-    await tapVisible(tester, find.text('Länger als 4 Stunden'));
+    await tapVisible(tester, find.text('Länger als 4 Stunden (bis ca. 20 km)'));
     await next(tester);
     await next(tester);
     await tapVisible(tester, find.text('Vorschläge zeigen'));
@@ -134,5 +135,39 @@ void main() {
       await tester.scrollUntilVisible(find.text(name), 200);
       expect(find.text(name), findsOneWidget);
     }
+  });
+
+  testWidgets('Vorschläge: schöne lange Tour mit Direktverbindung zuerst, '
+      'zu lange Runde fehlt', (tester) async {
+    final container = await pumpApp(tester);
+    await tapVisible(tester, find.text('Wanderung suchen'));
+    await next(tester); // Tourenart egal
+    expect(find.text('Länger als 4 Stunden (bis ca. 20 km)'), findsOneWidget);
+    await next(tester);
+    await next(tester);
+    await tapVisible(tester, find.text('Vorschläge zeigen'));
+
+    final ids = [
+      for (final t in container.read(suggestionsProvider).requireValue) t.id,
+    ];
+    expect(ids.first, 'demo_long_ride');
+    expect(ids.last, 'demo_loop');
+    expect(ids, isNot(contains('demo_too_long')));
+    expect(ids, hasLength(5));
+
+    // Erste Karte: Landschaft, Direktverbindung, Einkehr am Schluss
+    expect(
+      find.text('DEMO Karlstadt – Gambach (Maintalhöhen)'),
+      findsOneWidget,
+    );
+    expect(find.text('Landschaftlich besonders schön'), findsOneWidget);
+    expect(
+      find.text('Fahrt ca. 35 Min. hin, 40 Min. zurück, ohne Umsteigen'),
+      findsOneWidget,
+    );
+    expect(
+      find.text('Einkehr: DEMO Weinstube am Bahnhof, am Ziel'),
+      findsOneWidget,
+    );
   });
 }

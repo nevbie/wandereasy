@@ -36,7 +36,7 @@ void main() {
 
   testWidgets('Demo-Touren laden', (tester) async {
     demo = await loadDemoTours(tester);
-    expect(demo, hasLength(3));
+    expect(demo, hasLength(6));
   });
 
   test('TourCodec: Hin und zurück ergibt dieselben Daten', () {

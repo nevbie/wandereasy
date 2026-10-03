@@ -72,3 +72,15 @@ klären muss, stehen in SPEC Abschnitt 16.
 | D48 | Probelauf ohne GPS | Knopf „Probelauf ohne GPS“ (Zeitraffer mit einem Abstecher) zum Ausprobieren zu Hause; per `SIMULATION=false` abschaltbar. **Für den Pilot (M8) abschalten** | Testen ohne Wanderung |
 | D49 | Sprachansagen | `flutter_tts` (de-DE, etwas langsamer); an/aus folgt mit den Einstellungen (M7), bis dahin an | SPEC 5.7, 5.9 |
 | D50 | Abkürzen | Knopf führt vorerst zu einem Platzhalter; Inhalt (nächste Haltestellen) kommt mit M4 | SPEC 5.8 gehört zu M4 |
+
+## Änderungswunsch 03.10.2026 (längere Touren, Einkehr am Schluss, Landschaft, Anfahrt)
+
+| # | Thema | Annahme / Entscheidung | Grund |
+|---|---|---|---|
+| D51 | „bis 15/20 km je nach Höhenprofil“ | Strecke ≤ 20 km und Leistungskilometer (km + Hm bergauf/100) ≤ 20. Gilt für Vorschläge, nicht für „Alle Touren“ | Übliches Maß (Leistungskilometer); ergibt genau 20 km flach bzw. 15 km bei 500 Hm |
+| D52 | „Einkehr eher am Schluss“ | Am Ziel, im letzten Drittel oder in den letzten 2 km. Wirkt als Bevorzugung in der Rangfolge, nicht als Ausschluss. Kurzfazit: „Einkehr am Ziel“ / „Einkehr zum Schluss“ / „Einkehr unterwegs“ | Touren mit Einkehr in der Mitte sollen weiter auffindbar bleiben |
+| D53 | „landschaftlich schön“ | Gepflegtes Feld `scenery` (3 Stufen) statt automatischer Ableitung | Schönheit lässt sich nicht verlässlich aus Daten berechnen; Tourenleitung kennt die Strecken |
+| D54 | „bis zu 1 h Anfahrt“ | Standard-Obergrenze 60 Min. einfache Fahrt inkl. Fußweg vom Startpunkt, für alle Touren mit Bus/Bahn (auch ohne Fahrzeit-Frage). „Egal“ hebt sie auf | Wunsch des Vereins |
+| D55 | „bevorzugt ohne Umsteigen“ | Rangfolge: direkt +2, 1 Umstieg ±0, jeder weitere −2. Unbekannt = neutral. Karte zeigt „ohne Umsteigen“ / „1-mal umsteigen“ | Bevorzugen, nicht ausschließen |
+| D56 | Gewichtung | Landschaft je Stufe +4, Einkehr am Schluss +3 (unterwegs +1), ohne Umsteigen +2; dann kürzere Gehzeit | Landschaft am wichtigsten, Werte in `SuggestionRules` anpassbar |
+| D57 | Demo-Daten | Drei weitere Demo-Touren: lange Tour mit Direktverbindung und Einkehr am Ziel (16,5 km), Tour mit Umstieg (55 Min.), zu lange Runde (21,5 km, nur unter „Alle Touren“) | Neue Regeln sichtbar und testbar |

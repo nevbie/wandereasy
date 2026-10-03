@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
+import '../../search/domain/tour_filter.dart';
 import '../domain/start_point.dart';
 import '../domain/tour.dart';
 import 'difficulty_badge.dart';
@@ -29,6 +30,7 @@ class TourCard extends StatelessWidget {
     final scheme = theme.colorScheme;
     final body = theme.textTheme.bodyMedium;
     final hint = foodHint(l10n, tour);
+    final scenery = sceneryLabel(l10n, tour.scenery);
 
     Widget line(IconData icon, String text) => Padding(
       padding: const EdgeInsets.only(top: 8),
@@ -76,6 +78,7 @@ class TourCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8),
                 child: DifficultyBadge(tour.difficulty),
               ),
+              if (scenery != null) line(Icons.landscape, scenery),
               line(Icons.train, rideText(l10n, tour, startPoint)),
               if (hint != null) line(Icons.restaurant, hint),
             ],
@@ -91,7 +94,7 @@ String rideText(AppLocalizations l10n, Tour tour, StartPoint startPoint) {
   final walk = startPoint.walkMinToStation;
   final ride = tour.ride;
   String d(int min) => formatDuration(l10n, min + walk);
-  return switch (tour.tourType) {
+  final time = switch (tour.tourType) {
     TourType.loop => l10n.rideNone,
     TourType.walkOutRideBack =>
       ride.fromEndMin == null ? '' : l10n.rideBack(d(ride.fromEndMin!)),
@@ -100,4 +103,7 @@ String rideText(AppLocalizations l10n, Tour tour, StartPoint startPoint) {
           ? ''
           : l10n.rideBoth(d(ride.toStartMin!), d(ride.fromEndMin!)),
   };
+  if (tour.tourType == TourType.loop) return time;
+  final transfers = transfersLabel(l10n, maxTransfers(tour));
+  return [time, ?transfers].where((s) => s.isNotEmpty).join(', ');
 }

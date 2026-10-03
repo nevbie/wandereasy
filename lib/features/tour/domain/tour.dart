@@ -58,13 +58,35 @@ class StopRef {
 // ANNAHME: Bis zum Tagesablauf (M4) reichen gepflegte Schätzwerte je Tour.
 @immutable
 class RideEstimate {
-  const RideEstimate({this.toStartMin, this.fromEndMin});
+  const RideEstimate({
+    this.toStartMin,
+    this.fromEndMin,
+    this.toStartTransfers,
+    this.fromEndTransfers,
+  });
 
   /// Hinfahrt zu Haltestelle A (nur `rideBothWays`).
   final int? toStartMin;
 
   /// Rückfahrt ab Haltestelle B.
   final int? fromEndMin;
+
+  /// Anzahl Umstiege auf der Hinfahrt (0 = direkt).
+  final int? toStartTransfers;
+
+  /// Anzahl Umstiege auf der Rückfahrt (0 = direkt).
+  final int? fromEndTransfers;
+}
+
+/// Landschaftliche Bewertung durch die Tourenleitung.
+enum Scenery {
+  normal,
+
+  /// Landschaftlich schön.
+  nice,
+
+  /// Landschaftlich besonders schön.
+  outstanding,
 }
 
 @immutable
@@ -89,6 +111,7 @@ class Tour {
     this.ride = const RideEstimate(),
     this.food = const [],
     this.pois = const [],
+    this.scenery = Scenery.normal,
     this.isDemo = false,
   });
 
@@ -116,6 +139,7 @@ class Tour {
   final RideEstimate ride;
   final List<TourFood> food;
   final List<Poi> pois;
+  final Scenery scenery;
   final bool isDemo;
 
   bool get hasFood => food.isNotEmpty;

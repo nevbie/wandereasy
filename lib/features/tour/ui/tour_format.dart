@@ -1,6 +1,7 @@
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/food_place.dart';
 import '../domain/tour.dart';
+import '../domain/tour_places.dart';
 
 /// Zahl mit deutschem Dezimalkomma; ganze Zahlen ohne Nachkommastelle.
 String formatDecimal(double value) {
@@ -55,10 +56,15 @@ String tourSummary(AppLocalizations l10n, Tour tour) {
     formatKm(l10n, tour.distanceM),
     formatAscent(l10n, tour.ascentM),
   ];
-  if (tour.food.any((f) => f.position == FoodPosition.onRoute)) {
-    parts.add(l10n.summaryFoodOnRoute);
-  } else if (tour.hasFood) {
+  final food = tour.food;
+  if (food.any((f) => f.position == FoodPosition.atEnd)) {
     parts.add(l10n.summaryFoodAtEnd);
+  } else if (food.any((f) => isLateFood(tour, f))) {
+    parts.add(l10n.summaryFoodLate);
+  } else if (food.any((f) => f.position == FoodPosition.onRoute)) {
+    parts.add(l10n.summaryFoodOnRoute);
+  } else if (food.isNotEmpty) {
+    parts.add(l10n.summaryFoodAtStart);
   }
   return parts.join(' · ');
 }
@@ -72,10 +78,14 @@ String foodPositionLabel(AppLocalizations l10n, TourFood f) =>
         f.atKm == null ? '' : l10n.foodAtKm(formatKmValue(f.atKm!)),
     };
 
-/// Einkehr-Hinweis für die Vorschlagskarte (SPEC 5.3).
+/// Einkehr-Hinweis für die Vorschlagskarte (SPEC 5.3). Nennt bevorzugt
+/// eine Einkehr am Schluss.
 String? foodHint(AppLocalizations l10n, Tour tour) {
   if (!tour.hasFood) return null;
-  final f = tour.food.first;
+  final f = tour.food.lastWhere(
+    (f) => isLateFood(tour, f),
+    orElse: () => tour.food.first,
+  );
   return switch (f.position) {
     FoodPosition.atEnd => l10n.foodHintAtEnd(f.place.name),
     FoodPosition.atStart => l10n.foodHintAtStart(f.place.name),
@@ -104,3 +114,18 @@ String formatDistance(AppLocalizations l10n, double meters) {
 /// Meter für Ansagen, auf 10 m gerundet, mindestens 10.
 int roundMeters(double meters) =>
     ((meters / 10).round() * 10).clamp(10, 100000);
+
+/// „Landschaftlich (besonders) schön“ oder `null`.
+String? sceneryLabel(AppLocalizations l10n, Scenery s) => switch (s) {
+  Scenery.normal => null,
+  Scenery.nice => l10n.sceneryNice,
+  Scenery.outstanding => l10n.sceneryOutstanding,
+};
+
+/// „ohne Umsteigen“ / „1-mal umsteigen“ oder `null`, wenn unbekannt.
+String? transfersLabel(AppLocalizations l10n, int? transfers) =>
+    transfers == null
+    ? null
+    : transfers == 0
+    ? l10n.rideDirect
+    : l10n.rideTransfers(transfers);

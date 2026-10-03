@@ -29,3 +29,25 @@ LatLng? poiLocation(Tour tour, Poi poi) {
 bool startEqualsEnd(Tour tour) =>
     tour.route.length >= 2 &&
     distanceM(tour.route.first, tour.route.last) < 100;
+
+/// Einkehr gilt als „am Schluss“, wenn sie im letzten Drittel liegt …
+const double lateFoodShare = 0.66;
+
+/// … oder höchstens so viele km vor dem Ziel.
+const double lateFoodLastKm = 2;
+
+/// Liegt die Einkehr am Ziel oder im letzten Teil der Strecke?
+/// (Wunsch des Vereins: Einkehr lieber zum Schluss.)
+bool isLateFood(Tour tour, TourFood food) {
+  switch (food.position) {
+    case FoodPosition.atEnd:
+      return true;
+    case FoodPosition.atStart:
+      return false;
+    case FoodPosition.onRoute:
+      final at = food.atKm;
+      if (at == null) return false;
+      final total = tour.distanceM / 1000;
+      return at >= total * lateFoodShare || total - at <= lateFoodLastKm;
+  }
+}

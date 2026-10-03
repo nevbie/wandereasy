@@ -1,5 +1,14 @@
 # Changelog
 
+## Änderungswunsch 03.10.2026
+
+- Längere Touren in den Vorschlägen: bis 20 km bzw. 20 Leistungskilometer (km + Hm/100); Antwort „Länger als 4 Stunden (bis ca. 20 km)“
+- Neue Rangfolge der Vorschläge: landschaftlich schöne Strecken zuerst, dann Einkehr am Schluss, dann Anfahrt ohne Umsteigen
+- Anfahrt standardmäßig bis 60 Min. für alle Touren mit Bus/Bahn; Karte zeigt „ohne Umsteigen“ / „1-mal umsteigen“
+- Neues Tourfeld „Landschaft“ (normal / schön / besonders schön), angezeigt auf Karte und im Detail
+- Kurzfazit unterscheidet „Einkehr am Ziel“, „Einkehr zum Schluss“, „Einkehr unterwegs“
+- Drei zusätzliche Demo-Touren; SPEC Abschnitt 18 ergänzt
+
 ## M3 – Navigation unterwegs
 
 - Navigation aus „Meine Touren“ → „Wanderung starten“: Erklärung vor der Standort-Abfrage, Hinweise bei verweigertem Standort oder ausgeschaltetem GPS

@@ -76,6 +76,8 @@ class _TourDetail extends StatelessWidget {
           tourTypeIcon(tour.tourType),
           tourTypeLabel(l10n, tour.tourType),
         ),
+        if (sceneryLabel(l10n, tour.scenery) case final scenery?)
+          _IconLine(Icons.landscape, scenery),
         const SizedBox(height: 24),
         FilledButton(
           onPressed: () => context.push(AppRoutes.dayPlan(tour.id)),

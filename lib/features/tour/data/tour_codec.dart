@@ -27,7 +27,13 @@ abstract final class TourCodec {
     ],
     'stopA': _stopToJson(t.stopA),
     'stopB': _stopToJson(t.stopB),
-    'ride': {'toStartMin': t.ride.toStartMin, 'fromEndMin': t.ride.fromEndMin},
+    'ride': {
+      'toStartMin': t.ride.toStartMin,
+      'fromEndMin': t.ride.fromEndMin,
+      'toStartTransfers': t.ride.toStartTransfers,
+      'fromEndTransfers': t.ride.fromEndTransfers,
+    },
+    'scenery': t.scenery.name,
     'food': [
       for (final f in t.food)
         {
@@ -73,10 +79,8 @@ abstract final class TourCodec {
     ],
     stopA: _stopFromJson(j['stopA']),
     stopB: _stopFromJson(j['stopB']),
-    ride: RideEstimate(
-      toStartMin: (j['ride'] as Map<String, dynamic>)['toStartMin'] as int?,
-      fromEndMin: (j['ride'] as Map<String, dynamic>)['fromEndMin'] as int?,
-    ),
+    ride: _rideFromJson(j['ride'] as Map<String, dynamic>),
+    scenery: Scenery.values.byName(j['scenery'] as String? ?? 'normal'),
     food: [
       for (final raw in j['food'] as List<dynamic>)
         _foodFromJson(raw as Map<String, dynamic>),
@@ -86,6 +90,13 @@ abstract final class TourCodec {
         _poiFromJson(raw as Map<String, dynamic>),
     ],
     isDemo: j['isDemo'] as bool,
+  );
+
+  static RideEstimate _rideFromJson(Map<String, dynamic> r) => RideEstimate(
+    toStartMin: r['toStartMin'] as int?,
+    fromEndMin: r['fromEndMin'] as int?,
+    toStartTransfers: r['toStartTransfers'] as int?,
+    fromEndTransfers: r['fromEndTransfers'] as int?,
   );
 
   static double? _d(Object? v) => (v as num?)?.toDouble();

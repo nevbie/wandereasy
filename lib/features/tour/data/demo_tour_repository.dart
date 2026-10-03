@@ -85,6 +85,7 @@ List<Tour> parseDemoTours(
           for (final p in (t['pois'] as List<dynamic>? ?? const []))
             _poi(p as Map<String, dynamic>),
         ],
+        scenery: Scenery.values.byName(t['scenery'] as String? ?? 'normal'),
         isDemo: t['isDemo'] as bool? ?? true,
       ),
     );
@@ -127,6 +128,8 @@ RideEstimate _ride(Object? v) {
   return RideEstimate(
     toStartMin: m['toStartMin'] as int?,
     fromEndMin: m['fromEndMin'] as int?,
+    toStartTransfers: m['toStartTransfers'] as int?,
+    fromEndTransfers: m['fromEndTransfers'] as int?,
   );
 }
 

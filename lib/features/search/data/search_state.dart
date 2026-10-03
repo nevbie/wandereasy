@@ -52,5 +52,10 @@ final suggestionsProvider = FutureProvider<List<Tour>>((ref) async {
 final allToursForStartProvider = FutureProvider<List<Tour>>((ref) async {
   final tours = await ref.watch(allToursProvider.future);
   final start = ref.watch(startPointProvider) ?? StartPointIds.bahnhof;
-  return filterTours(tours, SearchCriteria(startPointId: start));
+  // Ohne Längen- und Fahrzeitgrenze: wirklich alle Touren.
+  return filterTours(
+    tours,
+    SearchCriteria(startPointId: start, ride: RideChoice.any),
+    limitLength: false,
+  );
 });

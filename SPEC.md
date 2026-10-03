@@ -230,6 +230,7 @@ tours           (id, slug, name, description, tour_type enum[loop,walk_out_ride_
                  stop_a_id,                          -- nur ride_both_ways: Haltestelle am Wanderbeginn
                  stop_b_id,                          -- walk_out_ride_back + ride_both_ways: Haltestelle am Wanderende
                  has_food bool,                      -- abgeleitet aus tour_food
+                 scenery enum[normal,nice,outstanding], -- landschaftliche Bewertung (Abschnitt 18)
                  is_demo bool, published bool, updated_at, created_by)
 tour_elevation  (tour_id, profile jsonb)            -- [{d_m, ele_m}], vorberechnet
 pois            (id, tour_id, kind enum[wc,bench,viewpoint,shortcut,info], name, note, location geometry(Point,4326))
@@ -241,7 +242,8 @@ food_places     (id, name, kind enum[gasthaus,haeckerwirtschaft,cafe,huette,bier
 tour_food       (tour_id, food_place_id, at_km numeric, detour_min int, position enum[on_route,at_end,at_start])
 tour_photos     (id, tour_id, storage_path, caption, sort)
 stops           (id = zHV/DHID, name, location geometry(Point,4326))   -- aus zHV/GTFS importiert, nur Region
-tour_transit    (tour_id, direction enum[to,from], stop_id, lines text[], headway_note, walk_min, note)  -- Stufe 1, gepflegt
+tour_transit    (tour_id, direction enum[to,from], stop_id, lines text[], headway_note, walk_min, note,
+                 ride_min int, transfers int)  -- Stufe 1, gepflegt; Fahrzeit und Umstiege (Abschnitt 18)
 group_hikes     (id, tour_id, starts_at timestamptz, meeting_point text, meeting_location geometry(Point,4326),
                  leader_id, max_participants, guest_fee_cents, notes, status enum[planned,cancelled,done])
 registrations   (group_hike_id, profile_id, created_at, PK(group_hike_id, profile_id))
@@ -369,3 +371,15 @@ Nach jedem Meilenstein: `CHANGELOG.md` aktualisieren, offene Annahmen in `DECISI
 - Gemeinde Veitshöchheim – Lage & Anreise: https://www.gemeinde-veitshoechheim.de/unser-ort/zahlen-fakten/lage-anreise
 - BayernInfo – ÖPNV-Daten (GTFS/NeTEx, zHV, TRIAS): https://www.bayerninfo.de/en/about-bayerninfo-1/data-offer/public-transport-data
 - Konzeptdokument (Claude Docs): https://claude.ai/code/artifact/9e6c3a61-2ac0-4284-aea6-dc233c7ee930
+
+## 18. Änderungen nach Rückmeldung des Vereins (03.10.2026)
+
+Diese Punkte ergänzen bzw. ändern Abschnitt 5.2/5.3:
+
+1. **Längere Touren:** Vorschläge bis ca. 15–20 km, je nach Höhenprofil. Regel: Strecke ≤ 20 km **und** km + Höhenmeter bergauf / 100 ≤ 20 („Leistungskilometer“; z. B. 20 km flach, 18 km mit 200 Hm, 15 km mit 500 Hm). Antwort „länger“ bei der Gehzeit: „Länger als 4 Stunden (bis ca. 20 km)“. „Alle Touren zeigen“ zeigt auch längere Touren.
+2. **Einkehr eher am Schluss:** Touren mit Einkehr am Ziel oder im letzten Drittel (bzw. in den letzten 2 km) werden bevorzugt; die Vorschlagskarte nennt diese Einkehr. Im Tagesablauf (5.5) wird die Einkehr standardmäßig ans Ende gelegt.
+3. **Landschaftlich schöne Strecken bevorzugen:** Feld `scenery` (normal / schön / besonders schön), gepflegt von der Tourenleitung; wird auf Karte und Detail als Text angezeigt und zählt am stärksten in der Rangfolge.
+4. **Auch weiter weg:** Anfahrt mit Bus/Bahn standardmäßig bis 60 Min. (einfache Fahrt inkl. Fußweg vom Startpunkt), gilt für alle Touren mit Fahrten; Verbindungen **ohne Umsteigen** werden bevorzugt, mehrfaches Umsteigen nach hinten gereiht. Die Fahrzeit-Frage hat „bis 60 Minuten“ vorausgewählt.
+
+Rangfolge der Vorschläge (Gewichte als Konstanten in `SuggestionRules`): Landschaft > Einkehr am Schluss > ohne Umsteigen; bei Gleichstand kürzere Gehzeit.
+

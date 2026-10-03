@@ -5,7 +5,9 @@
       "id": "demo_gasthaus",
       "name": "DEMO Gasthaus Am Brunnen",
       "kind": "gasthaus",
-      "restDays": [1],
+      "restDays": [
+        1
+      ],
       "openingHours": "Tu-Su 11:00-22:00",
       "note": "Demo-Eintrag"
     },
@@ -23,6 +25,16 @@
       "name": "DEMO Café am Main",
       "kind": "cafe",
       "note": "Demo-Eintrag ohne Öffnungszeiten"
+    },
+    {
+      "id": "demo_weinstube",
+      "name": "DEMO Weinstube am Bahnhof",
+      "kind": "gasthaus",
+      "restDays": [
+        2
+      ],
+      "openingHours": "We-Mo 11:30-21:00",
+      "note": "Demo-Eintrag"
     }
   ],
   "tours": [
@@ -31,42 +43,103 @@
       "name": "DEMO Rundweg Veitshöchheim",
       "description": "Beispiel-Rundweg über die Höhen bei Veitshöchheim mit schönem Blick ins Maintal. Nur Demo-Daten.",
       "tourType": "loop",
-      "startPointIds": ["nfh_vhh", "bf_vhh"],
+      "startPointIds": [
+        "nfh_vhh",
+        "bf_vhh"
+      ],
       "difficulty": "easy",
       "gpx": "assets/demo/demo_loop.gpx",
       "surfaceNotes": "Überwiegend breite Feldwege, ein kurzes Stück Waldpfad.",
-      "warnings": ["Nach Regen ist der Waldpfad bei km 2 rutschig."],
+      "warnings": [
+        "Nach Regen ist der Waldpfad bei km 2 rutschig."
+      ],
       "food": [
-        {"placeId": "demo_gasthaus", "position": "onRoute", "atKm": 3.0, "detourMin": 0}
+        {
+          "placeId": "demo_gasthaus",
+          "position": "onRoute",
+          "atKm": 3.0,
+          "detourMin": 0
+        }
       ],
       "pois": [
-        {"kind": "bench", "name": "Bank mit Blick ins Maintal", "atKm": 1.5},
-        {"kind": "viewpoint", "name": "Aussichtspunkt", "atKm": 2.2},
-        {"kind": "wc", "name": "WC im Gasthaus (für Gäste)", "atKm": 3.0},
-        {"kind": "shortcut", "name": "Abkürzung zurück zum Ort", "note": "Spart ca. 2 km", "atKm": 2.5}
-      ]
+        {
+          "kind": "bench",
+          "name": "Bank mit Blick ins Maintal",
+          "atKm": 1.5
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Aussichtspunkt",
+          "atKm": 2.2
+        },
+        {
+          "kind": "wc",
+          "name": "WC im Gasthaus (für Gäste)",
+          "atKm": 3.0
+        },
+        {
+          "kind": "shortcut",
+          "name": "Abkürzung zurück zum Ort",
+          "note": "Spart ca. 2 km",
+          "atKm": 2.5
+        }
+      ],
+      "scenery": "normal"
     },
     {
       "id": "demo_walk_out",
       "name": "DEMO Veitshöchheim – Thüngersheim",
       "description": "Beispiel-Streckenwanderung von Veitshöchheim über die Weinberge nach Thüngersheim, zurück mit dem Zug. Nur Demo-Daten.",
       "tourType": "walkOutRideBack",
-      "startPointIds": ["nfh_vhh", "bf_vhh"],
+      "startPointIds": [
+        "nfh_vhh",
+        "bf_vhh"
+      ],
       "difficulty": "medium",
       "gpx": "assets/demo/demo_walk_out.gpx",
       "surfaceNotes": "Feld- und Weinbergwege, teils Schotter.",
-      "warnings": ["Steiler Abstieg nach km 5."],
-      "stopB": {"id": "demo_stop_thuengersheim", "name": "Thüngersheim Bahnhof (Demo)"},
-      "ride": {"fromEndMin": 10},
+      "warnings": [
+        "Steiler Abstieg nach km 5."
+      ],
+      "stopB": {
+        "id": "demo_stop_thuengersheim",
+        "name": "Thüngersheim Bahnhof (Demo)"
+      },
+      "ride": {
+        "fromEndMin": 10,
+        "fromEndTransfers": 0
+      },
       "food": [
-        {"placeId": "demo_cafe", "position": "onRoute", "atKm": 2.5, "detourMin": 5},
-        {"placeId": "demo_haecker", "position": "atEnd", "detourMin": 3}
+        {
+          "placeId": "demo_cafe",
+          "position": "onRoute",
+          "atKm": 2.5,
+          "detourMin": 5
+        },
+        {
+          "placeId": "demo_haecker",
+          "position": "atEnd",
+          "detourMin": 3
+        }
       ],
       "pois": [
-        {"kind": "bench", "name": "Bank am Weinbergweg", "atKm": 3.0},
-        {"kind": "viewpoint", "name": "Weinbergblick", "atKm": 3.6},
-        {"kind": "info", "name": "Infotafel Weinbau", "atKm": 4.2}
-      ]
+        {
+          "kind": "bench",
+          "name": "Bank am Weinbergweg",
+          "atKm": 3.0
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Weinbergblick",
+          "atKm": 3.6
+        },
+        {
+          "kind": "info",
+          "name": "Infotafel Weinbau",
+          "atKm": 4.2
+        }
+      ],
+      "scenery": "nice"
     },
     {
       "id": "demo_ride_both",
@@ -77,17 +150,187 @@
       "difficulty": "hard",
       "gpx": "assets/demo/demo_ride_both.gpx",
       "surfaceNotes": "Waldwege und Pfade, zwei längere Anstiege.",
-      "warnings": ["Langer Anstieg zu Beginn.", "Steiler Abstieg nach km 6."],
-      "stopA": {"id": "demo_stop_retzbach", "name": "Retzbach-Zellingen Bahnhof (Demo)"},
-      "stopB": {"id": "demo_stop_thuengersheim", "name": "Thüngersheim Bahnhof (Demo)"},
-      "ride": {"toStartMin": 20, "fromEndMin": 10},
+      "warnings": [
+        "Langer Anstieg zu Beginn.",
+        "Steiler Abstieg nach km 6."
+      ],
+      "stopA": {
+        "id": "demo_stop_retzbach",
+        "name": "Retzbach-Zellingen Bahnhof (Demo)"
+      },
+      "stopB": {
+        "id": "demo_stop_thuengersheim",
+        "name": "Thüngersheim Bahnhof (Demo)"
+      },
+      "ride": {
+        "toStartMin": 20,
+        "fromEndMin": 10,
+        "toStartTransfers": 0,
+        "fromEndTransfers": 0
+      },
       "food": [
-        {"placeId": "demo_cafe", "position": "atEnd", "detourMin": 5}
+        {
+          "placeId": "demo_cafe",
+          "position": "atEnd",
+          "detourMin": 5
+        }
       ],
       "pois": [
-        {"kind": "bench", "name": "Rastplatz im Wald", "atKm": 3.0},
-        {"kind": "viewpoint", "name": "Aussicht über das Maintal", "atKm": 4.5},
-        {"kind": "shortcut", "name": "Abstieg zur Bushaltestelle", "note": "Bei Bedarf früher beenden", "atKm": 4.8}
+        {
+          "kind": "bench",
+          "name": "Rastplatz im Wald",
+          "atKm": 3.0
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Aussicht über das Maintal",
+          "atKm": 4.5
+        },
+        {
+          "kind": "shortcut",
+          "name": "Abstieg zur Bushaltestelle",
+          "note": "Bei Bedarf früher beenden",
+          "atKm": 4.8
+        }
+      ],
+      "scenery": "nice"
+    },
+    {
+      "id": "demo_long_ride",
+      "name": "DEMO Karlstadt – Gambach (Maintalhöhen)",
+      "description": "Beispiel für eine längere Streckenwanderung weiter weg: mit dem Zug ohne Umsteigen nach Karlstadt, über die Maintalhöhen mit vielen Aussichtspunkten, zum Schluss Einkehr am Bahnhof. Nur Demo-Daten.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "hard",
+      "gpx": "assets/demo/demo_long_ride.gpx",
+      "scenery": "outstanding",
+      "surfaceNotes": "Feld- und Waldwege, einige Pfade an den Hängen.",
+      "warnings": [
+        "Lange Tour – genug Wasser mitnehmen.",
+        "Steiler Abstieg nach km 13."
+      ],
+      "stopA": {
+        "id": "demo_stop_karlstadt",
+        "name": "Karlstadt Bahnhof (Demo)"
+      },
+      "stopB": {
+        "id": "demo_stop_gambach",
+        "name": "Gambach Bahnhof (Demo)"
+      },
+      "ride": {
+        "toStartMin": 35,
+        "fromEndMin": 40,
+        "toStartTransfers": 0,
+        "fromEndTransfers": 0
+      },
+      "food": [
+        {
+          "placeId": "demo_weinstube",
+          "position": "atEnd",
+          "detourMin": 2
+        }
+      ],
+      "pois": [
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Karlstadt",
+          "atKm": 2.5
+        },
+        {
+          "kind": "bench",
+          "name": "Rastplatz Höhenweg",
+          "atKm": 5.0
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Aussicht Maintalhöhen",
+          "atKm": 8.0
+        },
+        {
+          "kind": "wc",
+          "name": "WC am Wanderparkplatz",
+          "atKm": 9.5
+        },
+        {
+          "kind": "shortcut",
+          "name": "Abstieg zum Bahnhof Gambach",
+          "note": "Spart ca. 5 km",
+          "atKm": 10.0
+        }
+      ]
+    },
+    {
+      "id": "demo_far_transfer",
+      "name": "DEMO Spessart-Rundblick",
+      "description": "Beispiel für eine Tour mit Umsteigen: Bahn mit einem Umstieg, Rundblick über den Spessart. Nur Demo-Daten.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "medium",
+      "gpx": "assets/demo/demo_far_transfer.gpx",
+      "scenery": "nice",
+      "surfaceNotes": "Breite Forstwege.",
+      "warnings": [
+        "Langer Anstieg zu Beginn."
+      ],
+      "stopA": {
+        "id": "demo_stop_spessart",
+        "name": "Spessart Bahnhof (Demo)"
+      },
+      "stopB": {
+        "id": "demo_stop_spessart",
+        "name": "Spessart Bahnhof (Demo)"
+      },
+      "ride": {
+        "toStartMin": 55,
+        "fromEndMin": 55,
+        "toStartTransfers": 1,
+        "fromEndTransfers": 1
+      },
+      "food": [
+        {
+          "placeId": "demo_cafe",
+          "position": "onRoute",
+          "atKm": 3.0,
+          "detourMin": 0
+        }
+      ],
+      "pois": [
+        {
+          "kind": "viewpoint",
+          "name": "Rundblick",
+          "atKm": 4.0
+        }
+      ]
+    },
+    {
+      "id": "demo_too_long",
+      "name": "DEMO Große Weinbergrunde",
+      "description": "Beispiel für eine sehr lange Runde (über 20 km). Sie erscheint nicht in den Vorschlägen, nur unter „Alle Touren“. Nur Demo-Daten.",
+      "tourType": "loop",
+      "startPointIds": [
+        "nfh_vhh",
+        "bf_vhh"
+      ],
+      "difficulty": "hard",
+      "gpx": "assets/demo/demo_too_long.gpx",
+      "scenery": "outstanding",
+      "surfaceNotes": "Weinbergwege, teils Asphalt.",
+      "warnings": [
+        "Sehr lange Tour."
+      ],
+      "food": [
+        {
+          "placeId": "demo_haecker",
+          "position": "atEnd",
+          "detourMin": 5
+        }
+      ],
+      "pois": [
+        {
+          "kind": "viewpoint",
+          "name": "Weinbergblick",
+          "atKm": 8.0
+        }
       ]
     },
     {
@@ -95,7 +338,9 @@
       "name": "Natura Trail Höhfeldplatte",
       "description": "Vereinseigener Rundweg, ca. 15,4 km. Die Route folgt, sobald der Verein die GPX-Datei liefert.",
       "tourType": "loop",
-      "startPointIds": ["nfh_vhh"],
+      "startPointIds": [
+        "nfh_vhh"
+      ],
       "difficulty": "medium",
       "gpx": null,
       "published": false,

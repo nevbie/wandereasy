@@ -12,6 +12,7 @@ enum DurationChoice {
   bool matches(int durationMin) => switch (this) {
     upTo2h => durationMin <= 120,
     from2To4h => durationMin > 120 && durationMin <= 240,
+    // Nach oben begrenzt die Streckenlänge (siehe `withinLengthLimit`).
     longer => durationMin > 240,
     any => true,
   };
@@ -56,7 +57,7 @@ class SearchCriteria {
     this.duration = DurationChoice.any,
     this.effort = EffortChoice.any,
     this.requireFood = false,
-    this.ride = RideChoice.any,
+    this.ride = RideChoice.upTo60,
     this.date,
   });
 
@@ -66,7 +67,10 @@ class SearchCriteria {
   final EffortChoice effort;
   final bool requireFood;
 
-  /// Nur bei `rideBothWays` gefragt.
+  /// Höchste Fahrzeit (einfach). Gefragt wird nur bei `rideBothWays`,
+  /// gilt aber für alle Touren mit Bus/Bahn.
+  // ANNAHME: Standard „bis 60 Minuten“ – Anfahrt bis etwa 1 Std. (Wunsch
+  // des Vereins), siehe DECISIONS.md.
   final RideChoice ride;
 
   /// Geplanter Tag; wenn gesetzt, zählt nur Einkehr, die dann geöffnet hat.

@@ -10,7 +10,7 @@ void main() {
     final tours = await DemoTourRepository(rootBundle).allTours();
 
     expect(tours.map((t) => t.tourType).toSet(), TourType.values.toSet());
-    expect(tours, hasLength(3));
+    expect(tours, hasLength(6));
     for (final t in tours) {
       expect(t.isDemo, isTrue, reason: t.id);
       expect(t.hasFood, isTrue, reason: t.id);
