@@ -1,0 +1,540 @@
+{
+  "_hinweis": "Referenz-Routen. Route und Höhen aus GPX (in komoot geplant), Wegpunkt-Namen übersetzt. Fahrzeiten, Umstiege und Öffnungszeiten sind noch NICHT erfasst. Vor Veröffentlichung von der Tourenleitung prüfen.",
+  "foodPlaces": [
+    {
+      "id": "ref_food_meegaertle",
+      "name": "Meegärtle",
+      "kind": "biergarten",
+      "location": [
+        49.831674,
+        9.869488
+      ],
+      "note": "Öffnungszeiten noch nicht erfasst",
+      "isDemo": false
+    }
+  ],
+  "tours": [
+    {
+      "id": "ref_vhh_seelein_ravensburg",
+      "name": "Veitshöchheim: Seelein, Ravensburg und Weinberge",
+      "description": "Rundweg ab Veitshöchheim zum Naturdenkmal Seelein und zur Ruine Ravensburg, zurück durch die Weinberge mit vielen Blicken auf Main und Maintal.",
+      "tourType": "loop",
+      "startPointIds": [
+        "nfh_vhh",
+        "bf_vhh"
+      ],
+      "difficulty": "medium",
+      "gpx": "assets/tours/ref_vhh_seelein_ravensburg.gpx",
+      "scenery": "outstanding",
+      "warnings": [],
+      "food": [],
+      "pois": [
+        {
+          "kind": "info",
+          "name": "Gebranntes Hölzlein",
+          "atKm": 3.4
+        },
+        {
+          "kind": "info",
+          "name": "Naturdenkmal Seelein",
+          "atKm": 6.0
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf die Weinberge im Maintal",
+          "atKm": 7.5
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Silvaner-Weinberge und Maintal",
+          "atKm": 7.8
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Ruine Ravensburg mit Blick ins Maintal",
+          "atKm": 8.2
+        },
+        {
+          "kind": "bench",
+          "name": "Rastplatz mit Blick auf Main und Schleuse",
+          "atKm": 8.8
+        },
+        {
+          "kind": "info",
+          "name": "Marienbildstock im Weinberg",
+          "atKm": 8.9
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick vom Weinberg auf den Main",
+          "atKm": 9.0
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Main und Weinberge",
+          "atKm": 9.3
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen"
+    },
+    {
+      "id": "ref_vhh_schloss_seelein",
+      "name": "Veitshöchheim: Schlossgarten und Seelein",
+      "description": "Rundweg vom Schloss Veitshöchheim mit Hofgarten hinauf über dem Sendelbachtal zum Naturdenkmal Seelein und zurück.",
+      "tourType": "loop",
+      "startPointIds": [
+        "nfh_vhh",
+        "bf_vhh"
+      ],
+      "difficulty": "medium",
+      "gpx": "assets/tours/ref_vhh_schloss_seelein.gpx",
+      "scenery": "nice",
+      "warnings": [
+        "Kurzer schmaler Waldpfad (laut Planung „Jungle Path“) – bitte vorab prüfen."
+      ],
+      "food": [],
+      "pois": [
+        {
+          "kind": "info",
+          "name": "Königspavillon",
+          "atKm": 0.3
+        },
+        {
+          "kind": "info",
+          "name": "Statue „Dornauszieher“",
+          "atKm": 0.5
+        },
+        {
+          "kind": "info",
+          "name": "Putten an der Schlossterrasse",
+          "atKm": 0.7
+        },
+        {
+          "kind": "info",
+          "name": "Schloss Veitshöchheim",
+          "atKm": 0.8
+        },
+        {
+          "kind": "info",
+          "name": "Pfad oberhalb des Sendelbachtals",
+          "atKm": 2.4
+        },
+        {
+          "kind": "bench",
+          "name": "Bank und Infotafel am Seelein",
+          "atKm": 6.7
+        },
+        {
+          "kind": "info",
+          "name": "Naturdenkmal Seelein",
+          "atKm": 6.9
+        },
+        {
+          "kind": "info",
+          "name": "Schmaler Waldpfad",
+          "atKm": 8.3
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen"
+    },
+    {
+      "id": "ref_vhh_mainufer_hofgarten",
+      "name": "Veitshöchheim: Mainufer und Hofgarten",
+      "description": "Rundweg durch den Hofgarten Veitshöchheim, am Mainufer entlang und über die Höhe zurück zum Schloss.",
+      "tourType": "loop",
+      "startPointIds": [
+        "nfh_vhh",
+        "bf_vhh"
+      ],
+      "difficulty": "medium",
+      "gpx": "assets/tours/ref_vhh_mainufer_hofgarten.gpx",
+      "scenery": "nice",
+      "warnings": [
+        "Kurzer schmaler Waldpfad (laut Planung „Jungle Path“) – bitte vorab prüfen."
+      ],
+      "food": [
+        {
+          "placeId": "ref_food_meegaertle",
+          "position": "onRoute",
+          "atKm": 1.5,
+          "detourMin": 0
+        }
+      ],
+      "pois": [
+        {
+          "kind": "info",
+          "name": "Grotte im Rokokogarten",
+          "atKm": 0.5
+        },
+        {
+          "kind": "info",
+          "name": "Kleiner See im Hofgarten",
+          "atKm": 0.7
+        },
+        {
+          "kind": "info",
+          "name": "Mainufer Veitshöchheim",
+          "atKm": 1.4
+        },
+        {
+          "kind": "info",
+          "name": "Fischer-Skulptur am Mainufer",
+          "atKm": 1.6
+        },
+        {
+          "kind": "info",
+          "name": "Kneippbecken am Main",
+          "atKm": 1.9
+        },
+        {
+          "kind": "info",
+          "name": "Schmaler Waldpfad",
+          "atKm": 3.4
+        },
+        {
+          "kind": "info",
+          "name": "Schloss Veitshöchheim",
+          "atKm": 11.4
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen"
+    },
+    {
+      "id": "ref_winterhausen_steinkreis",
+      "name": "Winterhausen: Maintalblick und Steinkreis",
+      "description": "Rundweg ab Winterhausen hinauf auf die Höhe mit mehreren Aussichtspunkten über das Maintal und Eibelstadt, vorbei an alten Steinbruchgebäuden und einem Steinkreis.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "easy",
+      "gpx": "assets/tours/ref_winterhausen_steinkreis.gpx",
+      "scenery": "outstanding",
+      "warnings": [],
+      "food": [],
+      "pois": [
+        {
+          "kind": "info",
+          "name": "Natura-2000-Infotafel",
+          "atKm": 3.2
+        },
+        {
+          "kind": "bench",
+          "name": "Rastplatz mit Blick auf Winterhausen",
+          "atKm": 3.2
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Eibelstadt und das Maintal",
+          "atKm": 4.4
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick ins Maintal",
+          "atKm": 4.4
+        },
+        {
+          "kind": "info",
+          "name": "Ruinen alter Steinbruchgebäude",
+          "atKm": 5.1
+        },
+        {
+          "kind": "info",
+          "name": "Steinkreis bei Rottenbauer",
+          "atKm": 5.8
+        },
+        {
+          "kind": "info",
+          "name": "Muschelkalkweg",
+          "atKm": 7.9
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen",
+      "stopA": {
+        "id": "ref_stop_winterhausen",
+        "name": "Winterhausen"
+      },
+      "stopB": {
+        "id": "ref_stop_winterhausen",
+        "name": "Winterhausen"
+      }
+    },
+    {
+      "id": "ref_thuengersheim_hoehfeldplatte",
+      "name": "Thüngersheim: Höhfeldplatte und Schutzhütte Waldesruh",
+      "description": "Rundweg ab dem Ortskern Thüngersheim (Würzburger Tor) hinauf zur Höhfeldplatte mit Blick ins Maintal, zurück über die Schutzhütte Waldesruh.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "easy",
+      "gpx": "assets/tours/ref_thuengersheim_hoehfeldplatte.gpx",
+      "scenery": "nice",
+      "warnings": [],
+      "food": [],
+      "pois": [
+        {
+          "kind": "info",
+          "name": "Würzburger Tor",
+          "atKm": 0.2
+        },
+        {
+          "kind": "info",
+          "name": "Hirtentor",
+          "atKm": 0.3
+        },
+        {
+          "kind": "bench",
+          "name": "Schutzhütte Waldesruh",
+          "atKm": 1.5
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick ins Maintal an der Schutzhütte Höhfeldplatte",
+          "atKm": 2.8
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf den Steinbruch an der Höhfeldplatte",
+          "atKm": 3.2
+        },
+        {
+          "kind": "info",
+          "name": "Naturschutzgebiet Höhfeldplatte und Scharlachberg",
+          "atKm": 3.7
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen",
+      "stopA": {
+        "id": "ref_stop_thuengersheim",
+        "name": "Thüngersheim"
+      },
+      "stopB": {
+        "id": "ref_stop_thuengersheim",
+        "name": "Thüngersheim"
+      }
+    },
+    {
+      "id": "ref_winterhausen_sommerhausen",
+      "name": "Winterhausen – Sommerhausen: Schneckenweg und Altstadt",
+      "description": "Rundweg ab Winterhausen durch die Weinberge auf dem Skulpturenweg „Schneckenweg“ mit Blicken auf Sommerhausen, durch die Altstadt Sommerhausen und zurück.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "medium",
+      "gpx": "assets/tours/ref_winterhausen_sommerhausen.gpx",
+      "scenery": "outstanding",
+      "warnings": [],
+      "food": [],
+      "pois": [
+        {
+          "kind": "info",
+          "name": "Weg in den Weinberg",
+          "atKm": 1.7
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Schnecken-Denkmal mit Blick auf Sommerhausen",
+          "atKm": 1.7
+        },
+        {
+          "kind": "bench",
+          "name": "Riesenbank mit Blick auf Sommerhausen",
+          "atKm": 2.2
+        },
+        {
+          "kind": "info",
+          "name": "Skulpturenweg „Schneckenweg“",
+          "atKm": 2.8
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Sommerhausen und die Weinberge",
+          "atKm": 3.4
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Sommerhausen",
+          "atKm": 3.6
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Aussichtspunkt",
+          "atKm": 5.5
+        },
+        {
+          "kind": "info",
+          "name": "Altstadt Sommerhausen",
+          "atKm": 10.9
+        },
+        {
+          "kind": "info",
+          "name": "Schloss Sommerhausen",
+          "atKm": 11.0
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen",
+      "stopA": {
+        "id": "ref_stop_winterhausen",
+        "name": "Winterhausen"
+      },
+      "stopB": {
+        "id": "ref_stop_winterhausen",
+        "name": "Winterhausen"
+      }
+    },
+    {
+      "id": "ref_bergtheim_dipbach",
+      "name": "Bergtheim: Blick auf Dipbach und Neuheiligenthal",
+      "description": "Fast ebener Rundweg ab Bergtheim über Feldwege zum Weiher mit Rastplatz, mit Blicken auf Dipbach und Neuheiligenthal.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "easy",
+      "gpx": "assets/tours/ref_bergtheim_dipbach.gpx",
+      "scenery": "nice",
+      "warnings": [],
+      "food": [],
+      "pois": [
+        {
+          "kind": "bench",
+          "name": "Weiher mit Rastplatz",
+          "atKm": 3.1
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Dipbach",
+          "atKm": 4.0
+        },
+        {
+          "kind": "info",
+          "name": "Alter Sportplatz Dipbach",
+          "atKm": 4.3
+        },
+        {
+          "kind": "viewpoint",
+          "name": "Blick auf Neuheiligenthal",
+          "atKm": 5.7
+        },
+        {
+          "kind": "bench",
+          "name": "Bank an der Wegkreuzung",
+          "atKm": 6.4
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen",
+      "stopA": {
+        "id": "ref_stop_bergtheim",
+        "name": "Bergtheim"
+      },
+      "stopB": {
+        "id": "ref_stop_bergtheim",
+        "name": "Bergtheim"
+      }
+    },
+    {
+      "id": "ref_bergtheim_harfenspiel",
+      "name": "Bergtheim: Weinbergkapelle Harfenspiel",
+      "description": "Kurzer, fast ebener Rundweg ab Bergtheim zur Kapelle im Weinberg Harfenspiel mit Blick in die Weinberge.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "easy",
+      "gpx": "assets/tours/ref_bergtheim_harfenspiel.gpx",
+      "scenery": "nice",
+      "warnings": [],
+      "food": [],
+      "pois": [
+        {
+          "kind": "viewpoint",
+          "name": "Blick in den Weinberg am Kapellenblick",
+          "atKm": 2.2
+        },
+        {
+          "kind": "info",
+          "name": "Kapelle im Weinberg Harfenspiel",
+          "atKm": 2.2
+        },
+        {
+          "kind": "info",
+          "name": "Holunderplantage",
+          "atKm": 5.0
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen",
+      "stopA": {
+        "id": "ref_stop_bergtheim",
+        "name": "Bergtheim"
+      },
+      "stopB": {
+        "id": "ref_stop_bergtheim",
+        "name": "Bergtheim"
+      }
+    },
+    {
+      "id": "ref_winterhausen_mondweg",
+      "name": "Winterhausen: Mondweg und Steinbruch",
+      "description": "Rundweg ab Winterhausen auf dem Mondweg durch einen Hohlweg in die Weinberge, vorbei an Skulpturen und einem alten Steinbruch, zurück durch das Maintal.",
+      "tourType": "rideBothWays",
+      "startPointIds": [],
+      "difficulty": "easy",
+      "gpx": "assets/tours/ref_winterhausen_mondweg.gpx",
+      "scenery": "nice",
+      "warnings": [],
+      "food": [],
+      "pois": [
+        {
+          "kind": "info",
+          "name": "Gedenkstein Mondweg",
+          "atKm": 0.5
+        },
+        {
+          "kind": "info",
+          "name": "Hohlweg und Tunnel",
+          "atKm": 1.0
+        },
+        {
+          "kind": "bench",
+          "name": "Bank mit Blick auf die Weinberge",
+          "atKm": 1.6
+        },
+        {
+          "kind": "info",
+          "name": "Skulptur am Mondweg",
+          "atKm": 1.7
+        },
+        {
+          "kind": "info",
+          "name": "Steinkreis am Steinbruch",
+          "atKm": 1.8
+        },
+        {
+          "kind": "info",
+          "name": "Steinbruch bei Winterhausen",
+          "atKm": 3.2
+        },
+        {
+          "kind": "info",
+          "name": "Ruinen von Steinbruchkantine und Bierkeller",
+          "atKm": 3.5
+        },
+        {
+          "kind": "info",
+          "name": "Gedenkstätte Russengrab",
+          "atKm": 3.6
+        }
+      ],
+      "isDemo": false,
+      "sourceNote": "Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen",
+      "stopA": {
+        "id": "ref_stop_winterhausen",
+        "name": "Winterhausen"
+      },
+      "stopB": {
+        "id": "ref_stop_winterhausen",
+        "name": "Winterhausen"
+      }
+    }
+  ]
+}

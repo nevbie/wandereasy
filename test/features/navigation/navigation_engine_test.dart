@@ -21,7 +21,10 @@ void main() {
   late List<Tour> tours;
 
   setUpAll(() async {
-    tours = await DemoTourRepository(rootBundle).allTours();
+    tours = await DemoTourRepository(
+      rootBundle,
+      indexAssets: const [DemoTourRepository.demoIndex],
+    ).allTours();
   });
 
   Tour tour(String id) => tours.firstWhere((t) => t.id == id);

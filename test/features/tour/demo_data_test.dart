@@ -7,7 +7,10 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('Demo-Daten: je Tourenart eine Tour mit Einkehr (SPEC 11)', () async {
-    final tours = await DemoTourRepository(rootBundle).allTours();
+    final tours = await DemoTourRepository(
+      rootBundle,
+      indexAssets: const [DemoTourRepository.demoIndex],
+    ).allTours();
 
     expect(tours.map((t) => t.tourType).toSet(), TourType.values.toSet());
     expect(tours, hasLength(6));
@@ -31,7 +34,10 @@ void main() {
   });
 
   test('Platzhalter Höhfeldplatte ist nicht veröffentlicht', () async {
-    final tours = await DemoTourRepository(rootBundle).allTours();
+    final tours = await DemoTourRepository(
+      rootBundle,
+      indexAssets: const [DemoTourRepository.demoIndex],
+    ).allTours();
     expect(tours.where((t) => t.id.contains('hoehfeld')), isEmpty);
   });
 }

@@ -54,6 +54,7 @@ abstract final class TourCodec {
         },
     ],
     'isDemo': t.isDemo,
+    'sourceNote': t.sourceNote,
   };
 
   static Tour fromJson(Map<String, dynamic> j) => Tour(
@@ -90,6 +91,7 @@ abstract final class TourCodec {
         _poiFromJson(raw as Map<String, dynamic>),
     ],
     isDemo: j['isDemo'] as bool,
+    sourceNote: j['sourceNote'] as String?,
   );
 
   static RideEstimate _rideFromJson(Map<String, dynamic> r) => RideEstimate(

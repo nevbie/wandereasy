@@ -98,7 +98,12 @@ Future<void> tapVisible(WidgetTester tester, Finder finder) async {
 /// Lädt die Demo-Touren außerhalb der Fake-Async-Zone; sonst hängen
 /// gecachte Futures von rootBundle in folgenden Tests.
 Future<List<Tour>> loadDemoTours(WidgetTester tester) async =>
-    (await tester.runAsync(() => DemoTourRepository(rootBundle).allTours()))!;
+    (await tester.runAsync(
+      () => DemoTourRepository(
+        rootBundle,
+        indexAssets: const [DemoTourRepository.demoIndex],
+      ).allTours(),
+    ))!;
 
 /// Tourenquelle, die wie ohne Internet immer fehlschlägt.
 class OfflineTourRepository implements TourRepository {

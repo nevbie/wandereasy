@@ -139,18 +139,23 @@ void main() {
       ),
     ).map((t) => t.id).toList();
 
+    // Unbekannte Fahrzeit wird nie ausgeblendet, steht aber hinten.
     test('ab Bahnhof', () {
-      expect(run(bf, RideChoice.upTo30), ['ride']);
+      expect(run(bf, RideChoice.upTo30), ['ride', 'unknown']);
       expect(run(bf, RideChoice.any), hasLength(2));
     });
 
     test('ab Naturfreundehaus inkl. Fußweg', () {
-      expect(run(nfh, RideChoice.upTo30), isEmpty);
-      expect(run(nfh, RideChoice.upTo60), ['ride']);
+      expect(run(nfh, RideChoice.upTo30), ['unknown']);
+      expect(run(nfh, RideChoice.upTo60), ['ride', 'unknown']);
     });
 
-    test('unbekannte Fahrzeit wird bei gesetztem Limit ausgeblendet', () {
-      expect(run(bf, RideChoice.upTo90), ['ride']);
+    test('unbekannte Fahrzeit bleibt sichtbar, aber hinter bekannter', () {
+      expect(run(bf, RideChoice.upTo90), ['ride', 'unknown']);
+      expect(
+        suggestionScore(rideTours[1]),
+        lessThan(suggestionScore(rideTours[0])),
+      );
     });
 
     test('Fahrzeit-Frage wird nur bei Hin- und Rückfahrt gestellt', () {

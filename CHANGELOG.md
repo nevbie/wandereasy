@@ -1,5 +1,11 @@
 # Changelog
 
+## Referenz-Routen
+
+- 9 echte Rundwege (Veitshöchheim, Thüngersheim, Winterhausen/Sommerhausen, Bergtheim) aus vom Verein geplanten GPX-Dateien, mit Wegpunkten (Aussicht, Bänke, Sehenswertes) und Hinweis „Referenz-Route – vor Veröffentlichung prüfen“
+- Import-Skript `tools/import_reference_gpx.py` (bereinigt GPX, ordnet Wegpunkte km-genau zu)
+- Touren ohne bekannte Fahrzeit bleiben in der Suche sichtbar („Fahrzeit mit Bus/Bahn: bitte vorher prüfen“)
+
 ## Änderungswunsch 03.10.2026
 
 - Längere Touren in den Vorschlägen: bis 20 km bzw. 20 Leistungskilometer (km + Hm/100); Antwort „Länger als 4 Stunden (bis ca. 20 km)“

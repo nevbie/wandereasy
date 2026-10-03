@@ -113,6 +113,7 @@ class Tour {
     this.pois = const [],
     this.scenery = Scenery.normal,
     this.isDemo = false,
+    this.sourceNote,
   });
 
   final String id;
@@ -141,6 +142,10 @@ class Tour {
   final List<Poi> pois;
   final Scenery scenery;
   final bool isDemo;
+
+  /// Hinweis zur Herkunft, z. B. „Referenz-Route … – vor Veröffentlichung
+  /// prüfen“. Wird sichtbar angezeigt.
+  final String? sourceNote;
 
   bool get hasFood => food.isNotEmpty;
 

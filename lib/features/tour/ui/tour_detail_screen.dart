@@ -58,9 +58,9 @@ class _TourDetail extends StatelessWidget {
     return AppPage(
       title: tour.name,
       children: [
-        if (tour.isDemo) ...[
+        if (tour.isDemo || tour.sourceNote != null) ...[
           Text(
-            l10n.demoBadge,
+            tour.sourceNote ?? l10n.demoBadge,
             style: body?.copyWith(fontStyle: FontStyle.italic),
           ),
           const SizedBox(height: 8),

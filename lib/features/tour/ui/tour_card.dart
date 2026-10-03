@@ -57,9 +57,9 @@ class TourCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (tour.isDemo)
+              if (tour.isDemo || tour.sourceNote != null)
                 Text(
-                  l10n.demoBadge,
+                  tour.sourceNote ?? l10n.demoBadge,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: scheme.onSurfaceVariant,
                     fontStyle: FontStyle.italic,
@@ -97,10 +97,12 @@ String rideText(AppLocalizations l10n, Tour tour, StartPoint startPoint) {
   final time = switch (tour.tourType) {
     TourType.loop => l10n.rideNone,
     TourType.walkOutRideBack =>
-      ride.fromEndMin == null ? '' : l10n.rideBack(d(ride.fromEndMin!)),
+      ride.fromEndMin == null
+          ? l10n.rideUnknown
+          : l10n.rideBack(d(ride.fromEndMin!)),
     TourType.rideBothWays =>
       ride.toStartMin == null || ride.fromEndMin == null
-          ? ''
+          ? l10n.rideUnknown
           : l10n.rideBoth(d(ride.toStartMin!), d(ride.fromEndMin!)),
   };
   if (tour.tourType == TourType.loop) return time;

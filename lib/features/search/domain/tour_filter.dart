@@ -23,6 +23,7 @@ abstract final class SuggestionRules {
   static const int pointsFoodOnTheWay = 1;
   static const int pointsDirectRide = 2;
   static const int pointsPerExtraTransfer = -2;
+  static const int pointsUnknownRide = -1;
 }
 
 /// Leistungskilometer: Strecke plus Höhenmeter bergauf / 100.
@@ -93,7 +94,9 @@ bool matchesCriteria(Tour tour, SearchCriteria c, {bool limitLength = true}) {
   final maxRide = c.ride.maxMin;
   if (maxRide != null && tour.tourType != TourType.loop) {
     final travel = oneWayTravelMin(tour, startPointById(c.startPointId));
-    if (travel == null || travel > maxRide) return false;
+    // ANNAHME: Unbekannte Fahrzeit blendet die Tour nicht aus – die Karte
+    // sagt „bitte prüfen“, die Rangfolge setzt sie nach hinten.
+    if (travel != null && travel > maxRide) return false;
   }
   return true;
 }
@@ -114,6 +117,9 @@ int suggestionScore(Tour tour, {DateTime? date}) {
   }
 
   if (tour.tourType != TourType.loop) {
+    if (oneWayTravelMin(tour, startPointById(StartPointIds.bahnhof)) == null) {
+      score += SuggestionRules.pointsUnknownRide;
+    }
     final transfers = maxTransfers(tour);
     if (transfers == 0) {
       score += SuggestionRules.pointsDirectRide;

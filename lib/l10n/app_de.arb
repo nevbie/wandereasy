@@ -508,5 +508,6 @@
     }
   },
   "summaryFoodLate": "Einkehr zum Schluss",
-  "summaryFoodAtStart": "Einkehr am Start"
+  "summaryFoodAtStart": "Einkehr am Start",
+  "rideUnknown": "Fahrzeit mit Bus/Bahn: bitte vorher prüfen"
 }

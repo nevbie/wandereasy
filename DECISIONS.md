@@ -84,3 +84,16 @@ klären muss, stehen in SPEC Abschnitt 16.
 | D55 | „bevorzugt ohne Umsteigen“ | Rangfolge: direkt +2, 1 Umstieg ±0, jeder weitere −2. Unbekannt = neutral. Karte zeigt „ohne Umsteigen“ / „1-mal umsteigen“ | Bevorzugen, nicht ausschließen |
 | D56 | Gewichtung | Landschaft je Stufe +4, Einkehr am Schluss +3 (unterwegs +1), ohne Umsteigen +2; dann kürzere Gehzeit | Landschaft am wichtigsten, Werte in `SuggestionRules` anpassbar |
 | D57 | Demo-Daten | Drei weitere Demo-Touren: lange Tour mit Direktverbindung und Einkehr am Ziel (16,5 km), Tour mit Umstieg (55 Min.), zu lange Runde (21,5 km, nur unter „Alle Touren“) | Neue Regeln sichtbar und testbar |
+
+## Referenz-Routen (03.10.2026)
+
+| # | Thema | Annahme / Entscheidung | Grund |
+|---|---|---|---|
+| D58 | Quelle | 9 vom Verein in komoot geplante Rundwege, übernommen über `tools/import_reference_gpx.py` nach `assets/tours/`. Nur Track mit Höhe; Zeitstempel, komoot-Metadaten und Wegpunkte des Dienstes entfernt. Originaldateien liegen nicht im Repository | Echte Strecken zum Testen |
+| D59 | Rechte | Sichtbarer Hinweis „Referenz-Route (in komoot geplant) – vor Veröffentlichung prüfen“. **Vor der Verteilung an die Testgruppe klären**, ob die Nutzung der komoot-Exporte zulässig ist, oder die Strecken mit einem freien Planer (z. B. Mapy.com, brouter-web) nachplanen | komoot-Nutzungsbedingungen erlauben Exporte für die eigene Nutzung; Weitergabe in einer App ist nicht eindeutig |
+| D60 | Wegpunkte | komoot-Highlights als kurze, sachliche deutsche Namen übernommen (Übersetzungstabelle im Skript); keine Beschreibungstexte. Doppelte (gleiche Kapelle) zusammengefasst | Nur Ortsangaben, keine fremden Texte. **Übersetzungen bitte prüfen** (z. B. „Marienbildstock im Weinberg“, „Skulptur am Mondweg“) |
+| D61 | Tourenart | Start Veitshöchheim → Rundweg ab beiden Startpunkten. Start Thüngersheim, Winterhausen, Bergtheim → „mit Bus/Bahn hin und zurück“, Haltestelle A = B = Ort | Alle neun sind Rundwege |
+| D62 | Schwierigkeit / Landschaft | Vorschlag aus den Daten: leicht = ≤ 10 km und < 150 Hm; mittel = ≤ 14 Leistungs-km; sonst anspruchsvoll. Landschaft nach Zahl der Aussichtspunkte | Tourenleitung bestätigt bzw. ändert |
+| D63 | Fahrzeiten | Nicht erfasst (nicht erfunden). Unbekannte Fahrzeit blendet eine Tour **nicht mehr** aus; Karte zeigt „Fahrzeit mit Bus/Bahn: bitte vorher prüfen“, Rangfolge −1. Werte kommen mit M4 | Sonst wären alle Touren außerhalb Veitshöchheims unsichtbar |
+| D64 | Einkehr | Nur „Meegärtle“ (Biergarten am Mainufer) aus den Wegpunkten übernommen, Öffnungszeiten unbekannt („bitte vorher prüfen“). Weitere Einkehr folgt über OSM-Import mit Bestätigung | SPEC 5.11 |
+| D65 | Demo-Touren | Bleiben vorerst zusätzlich in der App (Kennzeichnung „DEMO“); die Tests nutzen nur die Demo-Daten | Stabile Tests; Entfernen auf Wunsch |

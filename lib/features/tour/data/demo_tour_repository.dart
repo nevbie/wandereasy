@@ -2,34 +2,42 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
+import '../../../core/geo/lat_lng.dart';
 import '../domain/food_place.dart';
 import '../domain/gpx.dart';
 import '../domain/route_stats.dart';
 import '../domain/tour.dart';
 import '../domain/tour_repository.dart';
 
-/// Lädt die Demo-Touren aus `assets/demo/` (SPEC 11).
+/// Lädt Touren aus den App-Assets: Referenz-Routen (`assets/tours/`) und
+/// Demo-Touren (`assets/demo/`, SPEC 11).
 class DemoTourRepository implements TourRepository {
-  DemoTourRepository(this._bundle);
+  DemoTourRepository(this._bundle, {this.indexAssets = defaultIndexAssets});
 
-  static const String indexAsset = 'assets/demo/tours.json';
+  static const String referenceIndex = 'assets/tours/tours.json';
+  static const String demoIndex = 'assets/demo/tours.json';
+  static const List<String> defaultIndexAssets = [referenceIndex, demoIndex];
 
   final AssetBundle _bundle;
+  final List<String> indexAssets;
   Future<List<Tour>>? _cache;
 
   @override
   Future<List<Tour>> allTours() => _cache ??= _load();
 
   Future<List<Tour>> _load() async {
-    final json = jsonDecode(
-      await _bundle.loadString(indexAsset),
-    ) as Map<String, dynamic>;
-    final gpx = <String, String>{};
-    for (final t in json['tours'] as List<dynamic>) {
-      final path = (t as Map<String, dynamic>)['gpx'] as String?;
-      if (path != null) gpx[path] = await _bundle.loadString(path);
+    final tours = <Tour>[];
+    for (final index in indexAssets) {
+      final json =
+          jsonDecode(await _bundle.loadString(index)) as Map<String, dynamic>;
+      final gpx = <String, String>{};
+      for (final t in json['tours'] as List<dynamic>) {
+        final path = (t as Map<String, dynamic>)['gpx'] as String?;
+        if (path != null) gpx[path] = await _bundle.loadString(path);
+      }
+      tours.addAll(parseDemoTours(json, gpx));
     }
-    return parseDemoTours(json, gpx);
+    return tours;
   }
 }
 
@@ -87,6 +95,7 @@ List<Tour> parseDemoTours(
         ],
         scenery: Scenery.values.byName(t['scenery'] as String? ?? 'normal'),
         isDemo: t['isDemo'] as bool? ?? true,
+        sourceNote: t['sourceNote'] as String?,
       ),
     );
   }
@@ -99,11 +108,18 @@ List<String> _strings(Object? v) => [
 
 double? _double(Object? v) => (v as num?)?.toDouble();
 
+LatLng? _latLng(Object? v) {
+  if (v == null) return null;
+  final l = v as List<dynamic>;
+  return LatLng(_double(l[0])!, _double(l[1])!);
+}
+
 FoodPlace _foodPlace(Map<String, dynamic> p) => FoodPlace(
   id: p['id'] as String,
   name: p['name'] as String,
   kind: FoodKind.values.byName(p['kind'] as String),
   phone: p['phone'] as String?,
+  location: _latLng(p['location']),
   openingHours: p['openingHours'] as String?,
   restDays: [for (final d in (p['restDays'] as List<dynamic>? ?? [])) d as int],
   seasonFrom: p['seasonFrom'] == null

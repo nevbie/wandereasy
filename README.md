@@ -46,6 +46,13 @@ lib/
 supabase/migrations/       Datenbank-Schema (ab M5)
 ```
 
+## Touren-Daten
+
+- `assets/tours/` – Referenz-Routen (echte Strecken), erzeugt mit
+  `python3 tools/import_reference_gpx.py <ordner-mit-gpx>`
+- `assets/demo/` – Demo-Touren für Entwicklung und Tests
+  (`python3 tools/make_demo_gpx.py`)
+
 ## Build (GitHub Actions)
 
 `.github/workflows/build.yaml` läuft bei Push auf `main`, bei Pull Requests
