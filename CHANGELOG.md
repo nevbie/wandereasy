@@ -1,5 +1,17 @@
 # Changelog
 
+## M3 – Navigation unterwegs
+
+- Navigation aus „Meine Touren“ → „Wanderung starten“: Erklärung vor der Standort-Abfrage, Hinweise bei verweigertem Standort oder ausgeschaltetem GPS
+- Karte folgt dem Standort, Route grün, gegangener Teil grau, Zoom-Knöpfe
+- Große Anzeige „Noch 3,2 km bis zum Ziel“ und „Noch 650 m bis: …“ (nächste Einkehr/POI)
+- Abweichungswarnung (> 40 m für > 20 s): Vibration, Sprachansage, rotes Banner; „Sie sind wieder auf dem Weg.“; Wiederholung jede Minute
+- Ansage „In 300 Metern: Gasthaus …“, Ansage bei Ankunft
+- Vordergrunddienst „Navigation läuft“ (Bildschirm darf aus sein), Standort alle 5 s / 10 m
+- Knöpfe „Ich möchte abkürzen“ (Inhalt folgt in M4), „Pause“ / „Weiter wandern“, „Wanderung beenden“ mit Bestätigung
+- „Probelauf ohne GPS“ für Tests zu Hause (abschaltbar)
+- Reine Logik mit Tests: Punkt-zu-Polylinie, Fortschritt auf der Route (auch Rundweg), Abweichungserkennung, Restdistanz; simulierte GPS-Tracks mit Abstechern und Rauschen
+
 ## M2 – Karte und Offline-Speichern
 
 - Karte im Tour-Detail (`flutter_map`, OSM-Kacheln): Route grün, Start/Ziel, Einkehr mit Beschriftung, POIs, Zoom-Knöpfe „+“/„−“, Zuordnung immer sichtbar

@@ -2,6 +2,14 @@
     <!-- Kartenkacheln laden; Netzstatus für den Hinweis „Kein Internet“ -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Navigation: Standort nur während der Navigation, im Vordergrunddienst
+         mit Benachrichtigung „Navigation läuft“ (SPEC 5.7). Kein
+         Hintergrund-Standort (ACCESS_BACKGROUND_LOCATION) nötig. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:label="NaturFreunde Wandern"
@@ -45,6 +53,10 @@
         <intent>
             <action android:name="android.intent.action.DIAL" />
             <data android:scheme="tel" />
+        </intent>
+        <!-- Sprachansagen (flutter_tts) -->
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
         </intent>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>

@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wandern/app.dart';
 import 'package:wandern/core/routing/app_router.dart';
 import 'package:wandern/core/settings/preferences.dart';
+import 'package:wandern/features/navigation/data/navigation_controller.dart';
 import 'package:wandern/features/offline/data/app_database.dart';
 import 'package:wandern/features/offline/data/offline_providers.dart';
 import 'package:wandern/features/search/data/start_point_store.dart';
@@ -16,6 +17,8 @@ import 'package:wandern/features/tour/data/tour_providers.dart';
 import 'package:wandern/features/tour/domain/start_point.dart';
 import 'package:wandern/features/tour/domain/tour.dart';
 import 'package:wandern/features/tour/domain/tour_repository.dart';
+
+import 'navigation_fakes.dart';
 
 /// Typische Telefongröße (logische Pixel).
 const Size phoneSize = Size(360, 760);
@@ -34,6 +37,9 @@ Future<ProviderContainer> pumpApp(
   bool online = true,
   AppDatabase? database,
   TourRepository? tourRepository,
+  FakeLocationSource? locationSource,
+  FakePermissionService? permission,
+  FakeAlerts? alerts,
 }) async {
   tester.view
     ..physicalSize = phoneSize * tester.view.devicePixelRatio
@@ -57,6 +63,13 @@ Future<ProviderContainer> pumpApp(
       appDatabaseProvider.overrideWithValue(db),
       mapTilesEnabledProvider.overrideWithValue(false),
       isOnlineProvider.overrideWithValue(AsyncData(online)),
+      locationSourceProvider.overrideWithValue(
+        locationSource ?? FakeLocationSource(),
+      ),
+      locationPermissionProvider.overrideWithValue(
+        permission ?? FakePermissionService(),
+      ),
+      navigationAlertsProvider.overrideWithValue(alerts ?? FakeAlerts()),
       appRouterProvider.overrideWith(
         (ref) => createAppRouter(
           initialLocation: initialLocation,

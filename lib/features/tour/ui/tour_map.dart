@@ -118,13 +118,13 @@ class _TourMapState extends ConsumerState<TourMap> {
                   right: 8,
                   child: Column(
                     children: [
-                      _MapButton(
+                      MapZoomButton(
                         label: '+',
                         semantics: l10n.mapZoomIn,
                         onPressed: () => _zoom(1),
                       ),
                       const SizedBox(height: AppSizes.tapTargetGap),
-                      _MapButton(
+                      MapZoomButton(
                         label: '−',
                         semantics: l10n.mapZoomOut,
                         onPressed: () => _zoom(-1),
@@ -132,7 +132,7 @@ class _TourMapState extends ConsumerState<TourMap> {
                     ],
                   ),
                 ),
-                const Positioned(left: 0, bottom: 0, child: _Attribution()),
+                const Positioned(left: 0, bottom: 0, child: MapAttribution()),
               ],
             ),
           ),
@@ -160,7 +160,11 @@ class _TourMapState extends ConsumerState<TourMap> {
           point: _ll(at),
           width: 36,
           height: 36,
-          child: _Dot(icon: poiIcon(poi.kind), color: MapColors.poi, size: 36),
+          child: MapDot(
+            icon: poiIcon(poi.kind),
+            color: MapColors.poi,
+            size: 36,
+          ),
         ),
       );
     }
@@ -214,8 +218,13 @@ class _TourMapState extends ConsumerState<TourMap> {
 }
 
 /// Rundes Symbol auf der Karte.
-class _Dot extends StatelessWidget {
-  const _Dot({required this.icon, required this.color, required this.size});
+class MapDot extends StatelessWidget {
+  const MapDot({
+    super.key,
+    required this.icon,
+    required this.color,
+    required this.size,
+  });
 
   final IconData icon;
   final Color color;
@@ -278,15 +287,16 @@ class _LabeledMarker extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 2),
-          _Dot(icon: icon, color: color, size: 40),
+          MapDot(icon: icon, color: color, size: 40),
         ],
       ),
     );
   }
 }
 
-class _MapButton extends StatelessWidget {
-  const _MapButton({
+class MapZoomButton extends StatelessWidget {
+  const MapZoomButton({
+    super.key,
     required this.label,
     required this.semantics,
     required this.onPressed,
@@ -337,8 +347,8 @@ class _MapButton extends StatelessWidget {
 }
 
 /// Immer sichtbare Zuordnung (SPEC 9).
-class _Attribution extends StatelessWidget {
-  const _Attribution();
+class MapAttribution extends StatelessWidget {
+  const MapAttribution({super.key});
 
   @override
   Widget build(BuildContext context) => Container(

@@ -71,6 +71,7 @@ jobs:
           TRANSIT_PROVIDER: ${{ vars.TRANSIT_PROVIDER || 'mock' }}
           MAP_TILE_URL: ${{ vars.MAP_TILE_URL }}
           MAP_ATTRIBUTION: ${{ vars.MAP_ATTRIBUTION }}
+          SIMULATION: ${{ vars.SIMULATION }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
@@ -82,6 +83,9 @@ jobs:
           )
           if [ -n "$MAP_TILE_URL" ]; then
             defines+=(--dart-define=MAP_TILE_URL="$MAP_TILE_URL")
+          fi
+          if [ -n "$SIMULATION" ]; then
+            defines+=(--dart-define=SIMULATION="$SIMULATION")
           fi
           if [ -n "$MAP_ATTRIBUTION" ]; then
             defines+=(--dart-define=MAP_ATTRIBUTION="$MAP_ATTRIBUTION")

@@ -23,6 +23,14 @@ abstract final class AppConfig {
     defaultValue: '© OpenStreetMap-Mitwirkende',
   );
 
+  /// Zeigt „Probelauf ohne GPS“ in der Navigation (für Tests zu Hause).
+  // ANNAHME: Für die Testphase eingeschaltet; für den Pilotbetrieb im
+  // CI-Build per Variable `SIMULATION=false` abschalten.
+  static const bool enableSimulation = bool.fromEnvironment(
+    'SIMULATION',
+    defaultValue: true,
+  );
+
   static const String supabaseUrl = String.fromEnvironment('SUPABASE_URL');
 
   static const String supabaseAnonKey = String.fromEnvironment(

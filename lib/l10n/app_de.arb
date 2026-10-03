@@ -404,5 +404,96 @@
   "deleteYes": "Ja, löschen",
   "noGoBack": "Nein, zurück",
   "navigationTitle": "Navigation",
-  "offlineBanner": "Kein Internet – gespeicherte Touren funktionieren trotzdem."
+  "offlineBanner": "Kein Internet – gespeicherte Touren funktionieren trotzdem.",
+  "navPermissionExplain": "Damit die Karte zeigt, wo Sie sind, braucht die App Ihren Standort. Der Standort bleibt auf Ihrem Gerät und wird nicht gespeichert.",
+  "navBackgroundExplain": "Während der Wanderung darf der Bildschirm aus sein. Oben im Handy steht dann „Navigation läuft“. Weicht der Weg ab, vibriert das Handy und sagt Bescheid.",
+  "navStartWithPermission": "Standort freigeben und starten",
+  "navStart": "Navigation starten",
+  "navSimulate": "Probelauf ohne GPS",
+  "navSimulateHint": "Zum Ausprobieren zu Hause: Die App läuft die Tour im Zeitraffer ab und kommt einmal vom Weg ab.",
+  "navDenied": "Ohne Standort kann die App Sie nicht führen. Bitte tippen Sie auf „Erneut versuchen“ und erlauben Sie den Standort.",
+  "navDeniedForever": "Der Standort ist für diese App gesperrt. Bitte öffnen Sie die Einstellungen und erlauben Sie unter „Berechtigungen“ den Standort.",
+  "navServiceDisabled": "Der Standort (GPS) ist ausgeschaltet. Bitte schalten Sie ihn in den Einstellungen ein und tippen Sie dann auf „Erneut versuchen“.",
+  "navRetry": "Erneut versuchen",
+  "navOpenSettings": "Einstellungen öffnen",
+  "navWaiting": "Standort wird gesucht … Unter freiem Himmel geht es schneller.",
+  "navRemaining": "Noch {distance} bis zum Ziel",
+  "@navRemaining": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "navNextTarget": "Noch {distance} bis: {name}",
+  "@navNextTarget": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "navOffRoute": "Sie sind vom Weg abgekommen. Bitte etwa {meters} m zurückgehen.",
+  "@navOffRoute": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "navOffRouteSpeech": "Sie sind vom Weg abgekommen. Bitte etwa {meters} Meter zurückgehen.",
+  "@navOffRouteSpeech": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "navBackOnRoute": "Sie sind wieder auf dem Weg.",
+  "navApproachingFood": "In {meters} m: {name}",
+  "@navApproachingFood": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "navApproachingFoodSpeech": "In {meters} Metern: {name}",
+  "@navApproachingFoodSpeech": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "navArrived": "Sie haben das Ziel erreicht.",
+  "navShortcut": "Ich möchte abkürzen",
+  "navPause": "Pause",
+  "navResume": "Weiter wandern",
+  "navPaused": "Pause – Ihr Standort wird gerade nicht verfolgt.",
+  "navFinish": "Wanderung beenden",
+  "navFinishTitle": "Wanderung beenden?",
+  "navFinishMessage": "Die Navigation wird ausgeschaltet.",
+  "navFinishYes": "Ja, beenden",
+  "navNoticeTitle": "Navigation läuft",
+  "navSimulationBadge": "Probelauf (Simulation) – kein echter Standort",
+  "navMapSemantics": "Karte mit Ihrem Standort. Der noch zu gehende Weg ist grün, der gegangene grau.",
+  "shortcutTitle": "Abkürzen",
+  "distanceMeters": "{meters} m",
+  "@distanceMeters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  }
 }

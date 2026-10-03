@@ -5,6 +5,7 @@ import '../../features/groups/ui/groups_screen.dart';
 import '../../features/help/ui/help_screen.dart';
 import '../../features/home/ui/home_screen.dart';
 import '../../features/navigation/ui/navigation_screen.dart';
+import '../../features/navigation/ui/shortcut_screen.dart';
 import '../../features/offline/ui/my_tours_screen.dart';
 import '../../features/search/data/start_point_store.dart';
 import '../../features/search/ui/question_screen.dart';
@@ -104,6 +105,13 @@ GoRouter createAppRouter({
                     path: 'navigation/:id',
                     builder: (c, s) =>
                         NavigationScreen(tourId: s.pathParameters['id']!),
+                    routes: [
+                      GoRoute(
+                        path: 'abkuerzen',
+                        builder: (c, s) =>
+                            ShortcutScreen(tourId: s.pathParameters['id']!),
+                      ),
+                    ],
                   ),
                 ],
               ),

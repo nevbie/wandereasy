@@ -26,6 +26,7 @@ Konfiguration per `--dart-define` (keine Secrets im Repo), siehe
 | `TRANSIT_PROVIDER` | `mock`, `static` (später `motis`, `trias`) | `mock` |
 | `MAP_TILE_URL` | URL-Vorlage für Rasterkacheln `{z}/{x}/{y}` | OSM-Standardkacheln (nur für Tests/wenige Nutzer) |
 | `MAP_ATTRIBUTION` | Zuordnung des Kartenanbieters | `© OpenStreetMap-Mitwirkende` |
+| `SIMULATION` | Knopf „Probelauf ohne GPS“ in der Navigation | `true` (Testphase) |
 | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | Backend | – |
 
 ## Ordnerstruktur
@@ -55,4 +56,4 @@ Tests und baut ein Release-APK. Das APK liegt im Actions-Lauf unter
 Optionale Secrets: `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`,
 `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD` (ohne diese: Debug-Signatur),
 `SUPABASE_URL`, `SUPABASE_ANON_KEY`. Optionale Variablen:
-`TRANSIT_PROVIDER`, `MAP_TILE_URL`, `MAP_ATTRIBUTION`.
+`TRANSIT_PROVIDER`, `MAP_TILE_URL`, `MAP_ATTRIBUTION`, `SIMULATION`.

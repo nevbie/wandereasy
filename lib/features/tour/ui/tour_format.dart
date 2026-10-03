@@ -91,3 +91,16 @@ String formatBytes(AppLocalizations l10n, int bytes) {
   if (bytes < 1000 * 1000) return l10n.sizeKb((bytes / 1000).ceil());
   return l10n.sizeMb(formatDecimal((bytes / 100000).round() / 10));
 }
+
+/// Entfernung unterwegs: unter 1 km in 50-m-Schritten, sonst km mit einer
+/// Nachkommastelle („650 m“, „3,2 km“).
+String formatDistance(AppLocalizations l10n, double meters) {
+  if (meters < 1000) {
+    return l10n.distanceMeters(((meters / 50).round() * 50).clamp(0, 950));
+  }
+  return l10n.distanceKm(formatDecimal((meters / 100).round() / 10));
+}
+
+/// Meter für Ansagen, auf 10 m gerundet, mindestens 10.
+int roundMeters(double meters) =>
+    ((meters / 10).round() * 10).clamp(10, 100000);

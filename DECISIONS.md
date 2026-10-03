@@ -54,3 +54,21 @@ klären muss, stehen in SPEC Abschnitt 16.
 | D35 | Meine Touren | Je Tour „Wanderung starten“ (Navigation folgt in M3), „Tour ansehen“, „Löschen“ mit Bestätigung „Ja, löschen“ / „Nein, zurück“ | SPEC 4, 5.6 |
 | D36 | Kein-Internet-Hinweis | Leiste über der unteren Navigation (connectivity_plus); im Zweifel gilt „online“ | SPEC 4 „Ladezustände“ |
 | D37 | Web | Offline-Speichern im Web nicht eingerichtet (Drift/WASM) | Web ist nur für die Tourenleitung (M6) |
+
+## M3
+
+| # | Thema | Annahme / Entscheidung | Grund |
+|---|---|---|---|
+| D38 | Abweichung | > 40 m für ≥ 20 s → Vibration + Ansage + rotes Banner. „Wieder auf dem Weg“ erst unter 30 m (Hysterese). Warnung wird jede Minute wiederholt, solange man abseits bleibt. Werte in `NavigationConfig` | SPEC 5.7; Hysterese und Wiederholung ergänzt, damit es an der Grenze nicht flackert und niemand die Warnung verpasst |
+| D39 | Ungenauer Standort | Standorte mit Genauigkeit > 50 m lösen keine Warnung aus | Im Wald/Tal sonst Fehlalarme |
+| D40 | Stillstand | Zeit läuft per Takt (alle 5 s) weiter, auch wenn wegen des 10-m-Filters keine Standorte kommen | Sonst keine Warnung, wenn man abseits stehen bleibt |
+| D41 | Position auf der Route | Suche bevorzugt nahe der letzten Position (150 m zurück, 1 km voraus); bei Rundwegen gewinnt am Start der Anfang. Liegt man im Suchfenster weit weg, an anderer Stelle aber auf der Route, gilt diese (Abkürzung) | Rundwege und doppelt begangene Wege |
+| D42 | Ziel erreicht | Weniger als 40 m vor dem Ende der Route | — |
+| D43 | Einkehr-Ansage | Einmal, sobald sie ≤ 300 m voraus liegt („In 300 Metern: …“); nicht während einer Abweichung | SPEC 5.11 |
+| D44 | „Nächster POI“ | Nächstes Ziel auf der Route: Einkehr oder POI (ohne Abkürzungen) | SPEC 5.7 |
+| D45 | Vordergrunddienst | Über `geolocator` (`ForegroundNotificationConfig`, „Navigation läuft“), Standort alle 5 s / 10 m. Keine Hintergrund-Standortberechtigung nötig. Benachrichtigungs-Berechtigung (Android 13+) wird nicht extra abgefragt; ohne sie läuft der Dienst trotzdem | SPEC 5.7, 10 |
+| D46 | Pause | Standort wird während der Pause nicht verfolgt (Akku), keine Warnungen | — |
+| D47 | Während der Navigation | Kein „Zurück“-Knopf; Verlassen nur über „Wanderung beenden“ mit Bestätigung | Versehentliches Beenden vermeiden |
+| D48 | Probelauf ohne GPS | Knopf „Probelauf ohne GPS“ (Zeitraffer mit einem Abstecher) zum Ausprobieren zu Hause; per `SIMULATION=false` abschaltbar. **Für den Pilot (M8) abschalten** | Testen ohne Wanderung |
+| D49 | Sprachansagen | `flutter_tts` (de-DE, etwas langsamer); an/aus folgt mit den Einstellungen (M7), bis dahin an | SPEC 5.7, 5.9 |
+| D50 | Abkürzen | Knopf führt vorerst zu einem Platzhalter; Inhalt (nächste Haltestellen) kommt mit M4 | SPEC 5.8 gehört zu M4 |
