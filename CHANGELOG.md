@@ -1,5 +1,15 @@
 # Changelog
 
+## M5 (Vorbereitung) – Datenbank
+
+- Supabase-Projekt (`supabase/config.toml`), Schema nach SPEC 6 als Migration mit PostGIS
+- Row Level Security auf allen Tabellen nach SPEC 2/6; Telefonnummern getrennt in `profile_private` (D40)
+- Trigger: Profil bei neuem Konto, nur Admins ändern Rollen und geben Touren frei, `has_food` aus `tour_food`, Anmeldung nur mit freiem Platz
+- `delete_my_account()` (SPEC 10), `hike_participant_count()`
+- Speicher-Buckets `tour-photos` und `tour-gpx`
+- Seed aus `assets/demo` (`tools/make_seed_sql.py`)
+- 42 pgTAP-Tests der Zugriffsregeln; Workflow „Datenbank“ prüft gegen echtes Supabase, `tools/supabase_local/test.sh` ohne Docker
+
 ## M2 – Karte und Offline-Speichern
 
 - Karte im Tour-Detail (`flutter_map`, OSM-Kacheln): Route grün, Start/Ziel, Einkehr mit Beschriftung, POIs, Zoom-Knöpfe „+“/„−“, Zuordnung immer sichtbar

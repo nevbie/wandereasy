@@ -54,3 +54,14 @@ klären muss, stehen in SPEC Abschnitt 16.
 | D35 | Meine Touren | Je Tour „Wanderung starten“ (Navigation folgt in M3), „Tour ansehen“, „Löschen“ mit Bestätigung „Ja, löschen“ / „Nein, zurück“ | SPEC 4, 5.6 |
 | D36 | Kein-Internet-Hinweis | Leiste über der unteren Navigation (connectivity_plus); im Zweifel gilt „online“ | SPEC 4 „Ladezustände“ |
 | D37 | Web | Offline-Speichern im Web nicht eingerichtet (Drift/WASM) | Web ist nur für die Tourenleitung (M6) |
+
+## M5 (Vorbereitung): Datenbank
+
+| # | Thema | Annahme / Entscheidung | Grund |
+|---|---|---|---|
+| D38 | Schema zuerst | Schema, RLS und Seed jetzt als Migrationen, bevor die App Supabase anbindet; Tests mit pgTAP (`supabase/tests`), in CI gegen echtes Supabase | Der Anon-Key liegt in der App – RLS muss von Anfang an stimmen und geprüft sein |
+| D39 | Freigeben | Tourenleitung legt Touren an und bearbeitet sie, `published` setzen/ändern dürfen nur Admins (Trigger `guard_tour`); Löschen nur Admins | SPEC 2: „Touren freigeben/löschen“ ist Admin-Recht |
+| D40 | Telefonnummern | Eigene Tabelle `profile_private (id, phone)` statt Spalte `profiles.phone`. Lesbar: eigene, Admins, Leitung einer Wanderung mit Anmeldung der Person. `profiles` (Name, Rolle) sehen Mitglieder nur für Tourenleitung/Admins | Abweichend von SPEC 6: RLS wirkt auf Zeilen, nicht Spalten; so bleibt die Nummer verborgen, der Name der Leitung sichtbar |
+| D41 | Saison der Einkehr | `season_from`/`season_to` als Text `MM-TT` statt `date` | Jährlich wiederkehrend (wie in `assets/demo/tours.json`) |
+| D42 | Anmeldung | Trigger prüft: Wanderung geplant, in der Zukunft, Platz frei (mit Zeilensperre). Rollen ändern nur Admins (Trigger). `delete_my_account()` löscht das Konto samt Profil und Anmeldungen. Anzahl der Anmeldungen öffentlich über `hike_participant_count()` | SPEC 5, 10 |
+| D43 | Crash-Reports | Noch kein Crash-Reporting eingebaut | SPEC 10: nur mit Einwilligung – kommt mit dem Einwilligungs-Dialog in M7 (z. B. Sentry ohne personenbezogene Daten) |

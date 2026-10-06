@@ -1,0 +1,44 @@
+name: Datenbank
+
+# Prüft Schema, RLS und Seed gegen echtes Supabase (lokaler Stack im Runner):
+# Migrationen + Seed anwenden, pgTAP-Tests (supabase/tests), Linter (Sicherheitswarnungen).
+# Lokal ohne Docker: tools/supabase_local/test.sh
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  db:
+    name: Schema und RLS prüfen
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Seed aktuell?
+        run: |
+          python3 tools/make_seed_sql.py
+          git diff --exit-code supabase/seed.sql
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.119.0
+
+      - name: Datenbank starten (Migrationen + Seed)
+        run: supabase db start
+
+      - name: RLS-Tests (pgTAP)
+        run: supabase test db --local
+
+      - name: Linter
+        run: supabase db lint --local --level warning --fail-on warning
