@@ -42,8 +42,29 @@ lib/
     widgets/               gemeinsame Bausteine (Seitengerüst, untere Leiste)
   features/<bereich>/{data,domain,ui}/
   l10n/app_de.arb          alle Texte
-supabase/migrations/       Datenbank-Schema (ab M5)
+supabase/
+  migrations/              Datenbank-Schema mit Row Level Security
+  tests/                   pgTAP-Tests der Zugriffsregeln (RLS)
+  seed.sql                 Demo-Daten, erzeugt aus assets/demo (tools/make_seed_sql.py)
+  config.toml              lokaler Supabase-Stack (supabase start)
+tools/supabase_local/      Tests ohne Docker auf einfachem Postgres + PostGIS
 ```
+
+## Datenbank (Supabase)
+
+Schema, Zugriffsregeln und Seed liegen versioniert in `supabase/` – Änderungen nur als neue
+Migration, nie von Hand im Dashboard. Jede Tabelle hat **Row Level Security**; der Anon-Key steckt
+in der App, deshalb ist RLS der eigentliche Schutz. Regeln: SPEC 2/6, Entscheidungen D38–D42.
+
+```bash
+python3 tools/make_seed_sql.py      # Seed nach Änderungen an assets/demo neu erzeugen
+supabase start && supabase test db  # mit Docker: echter lokaler Stack + pgTAP-Tests
+tools/supabase_local/test.sh        # ohne Docker (Postgres + PostGIS + pgTAP installiert)
+supabase db push                    # Migrationen ins verknüpfte Projekt (supabase link)
+```
+
+Betrieb: ein Supabase-Projekt für Entwicklung und ein eigenes für Produktion (Region Frankfurt,
+SPEC 7); in Produktion Backups mit Point-in-Time-Recovery einschalten.
 
 ## Build (GitHub Actions)
 
@@ -51,6 +72,11 @@ supabase/migrations/       Datenbank-Schema (ab M5)
 auf `main` und manuell („Run workflow“). Er prüft Formatierung, Analyse und
 Tests und baut ein Release-APK. Das APK liegt im Actions-Lauf unter
 „Artifacts“ zum Herunterladen.
+
+`.github/workflows/supabase.yaml` („Datenbank“) startet Supabase im Runner, wendet Migrationen
+und Seed an, führt die RLS-Tests aus und prüft mit dem Linter. Einmalig auf GitHub:
+*Settings → Branches* → `main` schützen, Pflicht-Checks „Prüfen und APK bauen“ und
+„Schema und RLS prüfen“.
 
 Optionale Secrets: `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`,
 `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD` (ohne diese: Debug-Signatur),
